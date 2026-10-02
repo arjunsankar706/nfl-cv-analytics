@@ -3,3 +3,4 @@ videos/
 yolo11n.pt
 __pycache__/
 .DS_Store
+tracked_players.mp4

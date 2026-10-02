@@ -1,7 +1,7 @@
 import cv2
 from ultralytics import YOLO
 
-# Load YOLO
+# Load YOLO model
 model = YOLO("yolo11n.pt")
 
 # Open NFL video
@@ -11,27 +11,49 @@ if not video.isOpened():
     print("Error: Could not open video.")
     exit()
 
-# Read one frame
-success, frame = video.read()
+# Get video properties
+width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+fps = video.get(cv2.CAP_PROP_FPS)
 
-if not success:
-    print("Error: Could not read frame.")
-    video.release()
-    exit()
+# Create output video
+output = cv2.VideoWriter(
+    "tracked_players.mp4",
+    cv2.VideoWriter_fourcc(*"mp4v"),
+    fps,
+    (width, height)
+)
 
-# Detect people
-results = model(frame, classes=[0])
+frame_number = 0
 
-# Draw YOLO's detections onto the frame
-annotated_frame = results[0].plot()
+while True:
+    success, frame = video.read()
 
-# Save the result as an image
-cv2.imwrite("detected_players.jpg", annotated_frame)
+    if not success:
+        break
 
-# Count detected people
-player_count = len(results[0].boxes)
+    frame_number += 1
 
-print("Players/people detected:", player_count)
-print("Saved: detected_players.jpg")
+    # Detect and track people
+    results = model.track(
+        frame,
+        classes=[0],
+        persist=True,
+        verbose=False
+    )
 
+    # Draw detection boxes + tracking IDs
+    annotated_frame = results[0].plot()
+
+    # Add frame to output video
+    output.write(annotated_frame)
+
+    print(f"Processing frame {frame_number}")
+
+# Clean up
 video.release()
+output.release()
+
+print("\nDONE!")
+print(f"Processed {frame_number} frames")
+print("Saved: tracked_players.mp4")
