@@ -1,25 +1,26 @@
 import cv2
 from ultralytics import YOLO
 
-# Load YOLO model
+VIDEO_PATH = "videos/RaidersBroncos.mp4"
+OUTPUT_PATH = "team_tracking.mp4"
+
 model = YOLO("yolo11n.pt")
 
-# Open NFL video
-video = cv2.VideoCapture("videos/RaidersBroncos.mp4")
+video = cv2.VideoCapture(VIDEO_PATH)
 
 if not video.isOpened():
-    print("Error: Could not open video.")
+    print("ERROR: Could not open video.")
     exit()
 
-# Get video properties
+fps = video.get(cv2.CAP_PROP_FPS)
 width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
-fps = video.get(cv2.CAP_PROP_FPS)
 
-# Create output video
+fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+
 output = cv2.VideoWriter(
-    "tracked_players.mp4",
-    cv2.VideoWriter_fourcc(*"mp4v"),
+    OUTPUT_PATH,
+    fourcc,
     fps,
     (width, height)
 )
@@ -34,26 +35,108 @@ while True:
 
     frame_number += 1
 
-    # Detect and track people
     results = model.track(
         frame,
-        classes=[0],
         persist=True,
+        classes=[0],
         verbose=False
     )
 
-    # Draw detection boxes + tracking IDs
-    annotated_frame = results[0].plot()
+    boxes = results[0].boxes
 
-    # Add frame to output video
-    output.write(annotated_frame)
+    if boxes is not None:
+        for box in boxes:
+            x1, y1, x2, y2 = map(
+                int,
+                box.xyxy[0].tolist()
+            )
 
-    print(f"Processing frame {frame_number}")
+            x1 = max(0, x1)
+            y1 = max(0, y1)
+            x2 = min(width, x2)
+            y2 = min(height, y2)
 
-# Clean up
+            if x2 <= x1 or y2 <= y1:
+                continue
+
+            box_width = x2 - x1
+            box_height = y2 - y1
+
+            crop_x1 = x1 + int(box_width * 0.20)
+            crop_x2 = x2 - int(box_width * 0.20)
+
+            crop_y1 = y1 + int(box_height * 0.20)
+            crop_y2 = y1 + int(box_height * 0.70)
+
+            player_crop = frame[
+                crop_y1:crop_y2,
+                crop_x1:crop_x2
+            ]
+
+            if player_crop.size == 0:
+                continue
+
+            gray = cv2.cvtColor(
+                player_crop,
+                cv2.COLOR_BGR2GRAY
+            )
+
+            brightness = gray.mean()
+
+            if brightness > 115:
+                team = "BRONCOS"
+                color = (255, 255, 255)
+            else:
+                team = "RAIDERS"
+                color = (0, 0, 0)
+
+            player_id = "?"
+
+            if box.id is not None:
+                player_id = int(box.id.item())
+
+            label = f"ID:{player_id} {team}"
+
+            cv2.rectangle(
+                frame,
+                (x1, y1),
+                (x2, y2),
+                color,
+                3
+            )
+
+            cv2.rectangle(
+                frame,
+                (x1, max(0, y1 - 30)),
+                (x1 + 190, y1),
+                color,
+                -1
+            )
+
+            text_color = (
+                (0, 0, 0)
+                if team == "BRONCOS"
+                else (255, 255, 255)
+            )
+
+            cv2.putText(
+                frame,
+                label,
+                (x1 + 5, y1 - 8),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.65,
+                text_color,
+                2
+            )
+
+    output.write(frame)
+
+    if frame_number % 100 == 0:
+        print(f"Processing frame {frame_number}")
+
 video.release()
 output.release()
 
-print("\nDONE!")
+print("DONE!")
 print(f"Processed {frame_number} frames")
-print("Saved: tracked_players.mp4")
+print(f"Saved: {OUTPUT_PATH}")
