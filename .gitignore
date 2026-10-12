@@ -1,7 +1,6 @@
 .venv/
-videos/
-yolo11n.pt
 __pycache__/
 .DS_Store
-tracked_players.mp4
-team_tracking.mp4
+videos/
+*.mp4
+*.pt
