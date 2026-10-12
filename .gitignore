@@ -1,6 +1,16 @@
 .venv/
 __pycache__/
 .DS_Store
+.pytest_cache/
 videos/
+samples/
+outputs/
 *.mp4
+*.mov
 *.pt
+# Downloaded nflverse data and trained artifacts are reproducible locally.
+data/
+models/
+*.joblib
+*.part
+.streamlit/secrets.toml

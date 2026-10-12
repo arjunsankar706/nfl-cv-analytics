@@ -1,0 +1,18 @@
+{
+  "source": "original main.py at tag v6-tracking-baseline, --device cpu --max-frames 90",
+  "label_counts": {
+    "UNKNOWN": 109,
+    "RAIDERS": 635,
+    "BRONCOS": 256,
+    "NON-PLAYER": 1
+  },
+  "camera": {
+    "available_frames": 87,
+    "estimated_homographies": 89,
+    "reference_resets": 1,
+    "mean_features": 212.09,
+    "mean_inlier_ratio": 0.9931
+  },
+  "frames": 90,
+  "track_count": 19
+}
