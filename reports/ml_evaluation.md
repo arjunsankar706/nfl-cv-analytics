@@ -1,6 +1,6 @@
 # RUN/PASS model evaluation
 
-Generated 2026-10-12 17:19 UTC by `python -m nfl_analytics.ml.train`.
+Generated 2026-10-12 17:47 UTC by `python -m nfl_analytics.ml.train`.
 
 * Train seasons: [2016, 2017, 2018, 2019, 2020, 2021, 2022]
 * Validation season (model selection): [2023]
@@ -43,6 +43,25 @@ Rows: train 237,686 / validation 35,294 / test 69,110. Selected: **gradient_boos
 Confusion matrix for the selected model (rows actual, columns predicted): RUN→RUN 19,145, RUN→PASS 8,222, PASS→RUN 7,782, PASS→PASS 33,961.
 
 Permutation importance on test (increase in log loss): qb_shotgun 0.0917, down 0.0857, ydstogo 0.0723, score_differential 0.0271, defenders_in_box 0.0217, game_seconds_remaining 0.0198
+
+## Feature set `qb_situation`
+
+Features: qb_shotgun, qb_pistol, qb_under_center, down, ydstogo, yardline_100, goal_to_go, qtr, game_seconds_remaining, half_seconds_remaining, score_differential, posteam_timeouts_remaining, defteam_timeouts_remaining, no_huddle
+
+Rows: train 237,917 / validation 35,378 / test 69,201. Selected: **gradient_boosting** (lowest validation log loss).
+
+| Model | Test acc | Precision (pass) | Recall (pass) | F1 (pass) | F1 macro | ROC AUC | Log loss | Brier | ECE |
+|---|---|---|---|---|---|---|---|---|---|
+| baseline_majority | 0.604 | 0.604 | 1.000 | 0.753 | 0.377 | 0.500 | 0.671 | 0.239 | 0.011 |
+| baseline_down_distance | 0.644 | 0.639 | 0.942 | 0.762 | 0.529 | 0.712 | 0.590 | 0.205 | 0.016 |
+| baseline_qb_alignment | 0.761 | 0.796 | 0.812 | 0.804 | 0.749 | 0.745 | 0.547 | 0.181 | 0.022 |
+| logistic_regression | 0.757 | 0.786 | 0.821 | 0.803 | 0.742 | 0.805 | 0.524 | 0.173 | 0.024 |
+| random_forest | 0.767 | 0.806 | 0.810 | 0.808 | 0.756 | 0.835 | 0.487 | 0.161 | 0.016 |
+| gradient_boosting ✔ | 0.768 | 0.806 | 0.810 | 0.808 | 0.757 | 0.838 | 0.482 | 0.160 | 0.010 |
+
+Confusion matrix for the selected model (rows actual, columns predicted): RUN→RUN 19,237, RUN→PASS 8,145, PASS→RUN 7,931, PASS→PASS 33,888.
+
+Permutation importance on test (increase in log loss): qb_shotgun 0.1108, down 0.0931, ydstogo 0.0875, score_differential 0.0352, game_seconds_remaining 0.0200, half_seconds_remaining 0.0182
 
 ## Feature set `situation`
 

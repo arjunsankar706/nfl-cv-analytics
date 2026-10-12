@@ -11,6 +11,8 @@ Feature sets
                      computer-vision pipeline can estimate from one frame.
 ``vision_situation`` ``vision`` plus down/distance/field position/clock/score,
                      for when the viewer supplies the scoreboard context.
+``qb_situation``     QB alignment plus game situation, for clips where the
+                     box count cannot be measured reliably.
 ``situation``        Game situation only (classic down-and-distance model).
 ``full``             Everything above plus offensive/defensive personnel
                      counts. An upper reference using charted data the video
@@ -51,6 +53,7 @@ PERSONNEL_FEATURES = ["off_rb", "off_te", "off_wr", "off_ol", "def_dl", "def_lb"
 FEATURE_SETS: dict[str, list[str]] = {
     "vision": VISION_FEATURES,
     "vision_situation": VISION_FEATURES + SITUATION_FEATURES,
+    "qb_situation": ["qb_shotgun", "qb_pistol", "qb_under_center"] + SITUATION_FEATURES,
     "situation": SITUATION_FEATURES,
     "full": VISION_FEATURES + SITUATION_FEATURES + PERSONNEL_FEATURES,
 }

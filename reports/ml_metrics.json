@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-12 17:19 UTC",
+  "created_utc": "2026-10-12 17:47 UTC",
   "sklearn_version": "1.6.1",
   "split": {
     "train": [
@@ -62,7 +62,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.02,
+          "fit_seconds_train": 0.01,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -168,7 +168,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.06,
+          "fit_seconds_train": 0.09,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -221,7 +221,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 1.03,
+          "fit_seconds_train": 1.29,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -274,7 +274,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 2.58,
+          "fit_seconds_train": 5.4,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -660,7 +660,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 6.06,
+          "fit_seconds_train": 6.81,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -713,7 +713,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 3.72,
+          "fit_seconds_train": 7.15,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -908,8 +908,11 @@
         "no_huddle": 0.0
       }
     },
-    "situation": {
+    "qb_situation": {
       "features": [
+        "qb_shotgun",
+        "qb_pistol",
+        "qb_under_center",
         "down",
         "ydstogo",
         "yardline_100",
@@ -1036,6 +1039,508 @@
             ]
           }
         },
+        "baseline_qb_alignment": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7424,
+            "precision_pass": 0.7598,
+            "recall_pass": 0.8492,
+            "f1_pass": 0.8021,
+            "precision_run": 0.7042,
+            "recall_run": 0.5722,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7104,
+            "log_loss": 0.5717,
+            "brier": 0.1917,
+            "ece": 0.0315,
+            "confusion_matrix": [
+              [
+                7803,
+                5835
+              ],
+              [
+                3278,
+                18462
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.1,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7963,
+            "recall_pass": 0.812,
+            "f1_pass": 0.8041,
+            "precision_run": 0.704,
+            "recall_run": 0.6828,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5468,
+            "brier": 0.1809,
+            "ece": 0.0225,
+            "confusion_matrix": [
+              [
+                18696,
+                8686
+              ],
+              [
+                7860,
+                33959
+              ]
+            ]
+          }
+        },
+        "logistic_regression": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7393,
+            "precision_pass": 0.7536,
+            "recall_pass": 0.8556,
+            "f1_pass": 0.8013,
+            "precision_run": 0.7064,
+            "recall_run": 0.554,
+            "f1_macro": 0.7112,
+            "roc_auc": 0.7934,
+            "log_loss": 0.537,
+            "brier": 0.1793,
+            "ece": 0.0336,
+            "confusion_matrix": [
+              [
+                7556,
+                6082
+              ],
+              [
+                3140,
+                18600
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.13,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7567,
+            "precision_pass": 0.7859,
+            "recall_pass": 0.8212,
+            "f1_pass": 0.8031,
+            "precision_run": 0.7068,
+            "recall_run": 0.6583,
+            "f1_macro": 0.7424,
+            "roc_auc": 0.8047,
+            "log_loss": 0.5242,
+            "brier": 0.173,
+            "ece": 0.0239,
+            "confusion_matrix": [
+              [
+                18025,
+                9357
+              ],
+              [
+                7478,
+                34341
+              ]
+            ]
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7522,
+            "precision_pass": 0.774,
+            "recall_pass": 0.8428,
+            "f1_pass": 0.8069,
+            "precision_run": 0.708,
+            "recall_run": 0.6078,
+            "f1_macro": 0.7305,
+            "roc_auc": 0.8247,
+            "log_loss": 0.4962,
+            "brier": 0.1657,
+            "ece": 0.0222,
+            "confusion_matrix": [
+              [
+                8289,
+                5349
+              ],
+              [
+                3418,
+                18322
+              ]
+            ]
+          },
+          "fit_seconds_train": 7.82,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7672,
+            "precision_pass": 0.8059,
+            "recall_pass": 0.8098,
+            "f1_pass": 0.8078,
+            "precision_run": 0.7073,
+            "recall_run": 0.7021,
+            "f1_macro": 0.7563,
+            "roc_auc": 0.8348,
+            "log_loss": 0.4866,
+            "brier": 0.1612,
+            "ece": 0.0161,
+            "confusion_matrix": [
+              [
+                19226,
+                8156
+              ],
+              [
+                7956,
+                33863
+              ]
+            ]
+          }
+        },
+        "gradient_boosting": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.755,
+            "precision_pass": 0.7773,
+            "recall_pass": 0.8427,
+            "f1_pass": 0.8087,
+            "precision_run": 0.7104,
+            "recall_run": 0.6152,
+            "f1_macro": 0.734,
+            "roc_auc": 0.8278,
+            "log_loss": 0.4912,
+            "brier": 0.164,
+            "ece": 0.0185,
+            "confusion_matrix": [
+              [
+                8390,
+                5248
+              ],
+              [
+                3420,
+                18320
+              ]
+            ]
+          },
+          "fit_seconds_train": 6.78,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7677,
+            "precision_pass": 0.8062,
+            "recall_pass": 0.8103,
+            "f1_pass": 0.8083,
+            "precision_run": 0.7081,
+            "recall_run": 0.7025,
+            "f1_macro": 0.7568,
+            "roc_auc": 0.8376,
+            "log_loss": 0.4821,
+            "brier": 0.1598,
+            "ece": 0.0099,
+            "confusion_matrix": [
+              [
+                19237,
+                8145
+              ],
+              [
+                7931,
+                33888
+              ]
+            ]
+          }
+        }
+      },
+      "test_reliability_selected": [
+        {
+          "bin_low": 0.0,
+          "bin_high": 0.1,
+          "count": 1469,
+          "mean_predicted": 0.0628,
+          "observed_pass_rate": 0.0585
+        },
+        {
+          "bin_low": 0.1,
+          "bin_high": 0.2,
+          "count": 3751,
+          "mean_predicted": 0.1546,
+          "observed_pass_rate": 0.1552
+        },
+        {
+          "bin_low": 0.2,
+          "bin_high": 0.3,
+          "count": 5923,
+          "mean_predicted": 0.2576,
+          "observed_pass_rate": 0.2397
+        },
+        {
+          "bin_low": 0.3,
+          "bin_high": 0.4,
+          "count": 10445,
+          "mean_predicted": 0.3588,
+          "observed_pass_rate": 0.3388
+        },
+        {
+          "bin_low": 0.4,
+          "bin_high": 0.5,
+          "count": 5580,
+          "mean_predicted": 0.4388,
+          "observed_pass_rate": 0.4129
+        },
+        {
+          "bin_low": 0.5,
+          "bin_high": 0.6,
+          "count": 4686,
+          "mean_predicted": 0.5557,
+          "observed_pass_rate": 0.5587
+        },
+        {
+          "bin_low": 0.6,
+          "bin_high": 0.7,
+          "count": 7454,
+          "mean_predicted": 0.6446,
+          "observed_pass_rate": 0.6633
+        },
+        {
+          "bin_low": 0.7,
+          "bin_high": 0.8,
+          "count": 6659,
+          "mean_predicted": 0.7534,
+          "observed_pass_rate": 0.7516
+        },
+        {
+          "bin_low": 0.8,
+          "bin_high": 0.9,
+          "count": 8147,
+          "mean_predicted": 0.8482,
+          "observed_pass_rate": 0.8476
+        },
+        {
+          "bin_low": 0.9,
+          "bin_high": 1.0,
+          "count": 15087,
+          "mean_predicted": 0.9588,
+          "observed_pass_rate": 0.9555
+        }
+      ],
+      "permutation_importance_test": [
+        {
+          "feature": "qb_shotgun",
+          "log_loss_increase": 0.11078,
+          "std": 0.00314
+        },
+        {
+          "feature": "down",
+          "log_loss_increase": 0.09314,
+          "std": 0.00641
+        },
+        {
+          "feature": "ydstogo",
+          "log_loss_increase": 0.08746,
+          "std": 0.00286
+        },
+        {
+          "feature": "score_differential",
+          "log_loss_increase": 0.03518,
+          "std": 0.00163
+        },
+        {
+          "feature": "game_seconds_remaining",
+          "log_loss_increase": 0.01999,
+          "std": 0.00139
+        },
+        {
+          "feature": "half_seconds_remaining",
+          "log_loss_increase": 0.01822,
+          "std": 0.00143
+        },
+        {
+          "feature": "yardline_100",
+          "log_loss_increase": 0.014,
+          "std": 0.00084
+        },
+        {
+          "feature": "no_huddle",
+          "log_loss_increase": 0.00149,
+          "std": 0.00062
+        },
+        {
+          "feature": "posteam_timeouts_remaining",
+          "log_loss_increase": 0.0008,
+          "std": 0.00041
+        },
+        {
+          "feature": "goal_to_go",
+          "log_loss_increase": 0.00046,
+          "std": 0.00025
+        },
+        {
+          "feature": "qb_under_center",
+          "log_loss_increase": 0.00026,
+          "std": 0.00012
+        },
+        {
+          "feature": "qtr",
+          "log_loss_increase": 0.00012,
+          "std": 7e-05
+        },
+        {
+          "feature": "defteam_timeouts_remaining",
+          "log_loss_increase": 5e-05,
+          "std": 0.00011
+        },
+        {
+          "feature": "qb_pistol",
+          "log_loss_increase": -0.00023,
+          "std": 0.00015
+        }
+      ],
+      "reference_values": {
+        "qb_shotgun": 1.0,
+        "qb_pistol": 0.0,
+        "qb_under_center": 0.0,
+        "down": 2.0,
+        "ydstogo": 10.0,
+        "yardline_100": 55.0,
+        "goal_to_go": 0.0,
+        "qtr": 3.0,
+        "game_seconds_remaining": 1800.0,
+        "half_seconds_remaining": 831.0,
+        "score_differential": 0.0,
+        "posteam_timeouts_remaining": 3.0,
+        "defteam_timeouts_remaining": 3.0,
+        "no_huddle": 0.0
+      }
+    },
+    "situation": {
+      "features": [
+        "down",
+        "ydstogo",
+        "yardline_100",
+        "goal_to_go",
+        "qtr",
+        "game_seconds_remaining",
+        "half_seconds_remaining",
+        "score_differential",
+        "posteam_timeouts_remaining",
+        "defteam_timeouts_remaining",
+        "no_huddle"
+      ],
+      "rows": {
+        "train": 237917,
+        "validation": 35378,
+        "test": 69201
+      },
+      "selected_model": "gradient_boosting",
+      "selection_metric": "validation log loss",
+      "models": {
+        "baseline_majority": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.6145,
+            "precision_pass": 0.6145,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7612,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3806,
+            "roc_auc": 0.5,
+            "log_loss": 0.6667,
+            "brier": 0.2369,
+            "ece": 0.0009,
+            "confusion_matrix": [
+              [
+                0,
+                13638
+              ],
+              [
+                0,
+                21740
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.01,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.6043,
+            "precision_pass": 0.6043,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7534,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3767,
+            "roc_auc": 0.5,
+            "log_loss": 0.6715,
+            "brier": 0.2392,
+            "ece": 0.011,
+            "confusion_matrix": [
+              [
+                0,
+                27382
+              ],
+              [
+                0,
+                41819
+              ]
+            ]
+          }
+        },
+        "baseline_down_distance": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.6474,
+            "precision_pass": 0.6464,
+            "recall_pass": 0.9407,
+            "f1_pass": 0.7663,
+            "precision_run": 0.6554,
+            "recall_run": 0.1798,
+            "f1_macro": 0.5242,
+            "roc_auc": 0.7023,
+            "log_loss": 0.5903,
+            "brier": 0.205,
+            "ece": 0.0044,
+            "confusion_matrix": [
+              [
+                2452,
+                11186
+              ],
+              [
+                1289,
+                20451
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.12,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.6441,
+            "precision_pass": 0.6395,
+            "recall_pass": 0.9423,
+            "f1_pass": 0.7619,
+            "precision_run": 0.6817,
+            "recall_run": 0.1886,
+            "f1_macro": 0.5287,
+            "roc_auc": 0.7123,
+            "log_loss": 0.5902,
+            "brier": 0.2046,
+            "ece": 0.0159,
+            "confusion_matrix": [
+              [
+                5163,
+                22219
+              ],
+              [
+                2411,
+                39408
+              ]
+            ]
+          }
+        },
         "logistic_regression": {
           "validation": {
             "n": 35378,
@@ -1062,7 +1567,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.12,
+          "fit_seconds_train": 0.13,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1115,7 +1620,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 7.28,
+          "fit_seconds_train": 7.99,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1168,7 +1673,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 2.95,
+          "fit_seconds_train": 4.93,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1610,7 +2115,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 8.32,
+          "fit_seconds_train": 7.72,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -1663,7 +2168,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 7.15,
+          "fit_seconds_train": 5.08,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,

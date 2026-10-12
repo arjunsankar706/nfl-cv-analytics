@@ -196,7 +196,13 @@ def write_reliability_plot(report: dict, path: Path) -> None:
 
     figure, axis = plt.subplots(figsize=(5.2, 5.0), dpi=130)
     axis.plot([0, 1], [0, 1], linestyle="--", color="#888888", linewidth=1, label="perfect")
-    colors = {"vision": "#2b8cbe", "vision_situation": "#e6550d", "situation": "#31a354", "full": "#756bb1"}
+    colors = {
+        "vision": "#2b8cbe",
+        "vision_situation": "#e6550d",
+        "qb_situation": "#dd1c77",
+        "situation": "#31a354",
+        "full": "#756bb1",
+    }
     for feature_set, summary in report["feature_sets"].items():
         rows = summary["test_reliability_selected"]
         axis.plot(
@@ -322,6 +328,7 @@ def main(argv: list[str] | None = None) -> None:
                 "trained_on_seasons": train_seasons + val_seasons,
                 "test_seasons": test_seasons,
                 "test_metrics": summary["models"][selected]["test"],
+                "validation_metrics": summary["models"][selected]["validation"],
                 "reference_values": summary["reference_values"],
                 "sklearn_version": sklearn.__version__,
                 "created_utc": report["created_utc"],

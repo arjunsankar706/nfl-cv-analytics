@@ -7,6 +7,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tests"))
 
 SAMPLE_VIDEO = ROOT / "videos" / "RaidersBroncos.mp4"
 DETECTOR = ROOT / "yolo11n.pt"

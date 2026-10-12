@@ -19,9 +19,10 @@ import pandas as pd
 from .features import FEATURE_DESCRIPTIONS, FEATURE_SETS
 
 MODEL_DIR = Path(__file__).resolve().parents[2] / "models"
-# Most informative first. `full` needs personnel, which video cannot supply
-# reliably, but a user may enter it manually.
-PREFERENCE = ("full", "vision_situation", "vision", "situation")
+# Display order. At prediction time the model with the lowest *validation*
+# log loss among those whose inputs are all present is used (the test
+# seasons never influence the choice).
+PREFERENCE = ("full", "vision_situation", "qb_situation", "vision", "situation")
 QB_GROUP = ("qb_shotgun", "qb_pistol", "qb_under_center")
 
 STATUS_OK = "OK"
@@ -119,6 +120,7 @@ class RunPassPredictor:
                 inputs=supplied,
             )
         best_missing: list[str] | None = None
+        eligible = []
         for feature_set in PREFERENCE:
             artifact = self.artifacts.get(feature_set)
             if artifact is None:
@@ -126,14 +128,16 @@ class RunPassPredictor:
             missing = [name for name in artifact["features"] if name not in supplied]
             if best_missing is None or len(missing) < len(best_missing):
                 best_missing = missing
-            if missing:
-                continue
+            if not missing:
+                eligible.append((artifact.get("validation_metrics", {}).get("log_loss", 1.0), feature_set, artifact))
+        if eligible:
+            _, feature_set, artifact = min(eligible, key=lambda item: item[0])
             row = pd.DataFrame([[supplied[name] for name in artifact["features"]]], columns=artifact["features"])
-            model = artifact["model"]
-            p_pass = float(model.predict_proba(row)[0, 1])
+            p_pass = float(artifact["model"].predict_proba(row)[0, 1])
             return Prediction(
                 STATUS_OK,
-                f"Predicted with the `{feature_set}` model ({artifact['model_name']}).",
+                f"Predicted with the `{feature_set}` model ({artifact['model_name']}); "
+                f"chosen as the lowest-validation-loss model whose inputs are all available.",
                 p_pass=p_pass,
                 feature_set=feature_set,
                 model_name=artifact["model_name"],
