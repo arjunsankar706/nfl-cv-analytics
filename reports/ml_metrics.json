@@ -1,0 +1,1904 @@
+{
+  "created_utc": "2026-10-12 17:19 UTC",
+  "sklearn_version": "1.6.1",
+  "split": {
+    "train": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "validation": [
+      2023
+    ],
+    "test": [
+      2024,
+      2025
+    ]
+  },
+  "data_source": "nflverse-data play_by_play + pbp_participation release assets",
+  "feature_sets": {
+    "vision": {
+      "features": [
+        "qb_shotgun",
+        "qb_pistol",
+        "qb_under_center",
+        "defenders_in_box"
+      ],
+      "rows": {
+        "train": 237686,
+        "validation": 35294,
+        "test": 69110
+      },
+      "selected_model": "gradient_boosting",
+      "selection_metric": "validation log loss",
+      "models": {
+        "baseline_majority": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.6147,
+            "precision_pass": 0.6147,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7614,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3807,
+            "roc_auc": 0.5,
+            "log_loss": 0.6666,
+            "brier": 0.2369,
+            "ece": 0.0008,
+            "confusion_matrix": [
+              [
+                0,
+                13600
+              ],
+              [
+                0,
+                21694
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.02,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.604,
+            "precision_pass": 0.604,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7531,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3766,
+            "roc_auc": 0.5,
+            "log_loss": 0.6716,
+            "brier": 0.2393,
+            "ece": 0.0114,
+            "confusion_matrix": [
+              [
+                0,
+                27367
+              ],
+              [
+                0,
+                41743
+              ]
+            ]
+          }
+        },
+        "baseline_qb_alignment": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7425,
+            "precision_pass": 0.7599,
+            "recall_pass": 0.8495,
+            "f1_pass": 0.8022,
+            "precision_run": 0.7043,
+            "recall_run": 0.572,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7105,
+            "log_loss": 0.5715,
+            "brier": 0.1916,
+            "ece": 0.0314,
+            "confusion_matrix": [
+              [
+                7779,
+                5821
+              ],
+              [
+                3266,
+                18428
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.09,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7961,
+            "recall_pass": 0.8121,
+            "f1_pass": 0.804,
+            "precision_run": 0.7044,
+            "recall_run": 0.6827,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5469,
+            "brier": 0.1809,
+            "ece": 0.0224,
+            "confusion_matrix": [
+              [
+                18683,
+                8684
+              ],
+              [
+                7842,
+                33901
+              ]
+            ]
+          }
+        },
+        "logistic_regression": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7526,
+            "precision_pass": 0.766,
+            "recall_pass": 0.8604,
+            "f1_pass": 0.8104,
+            "precision_run": 0.7228,
+            "recall_run": 0.5807,
+            "f1_macro": 0.7272,
+            "roc_auc": 0.7917,
+            "log_loss": 0.5348,
+            "brier": 0.1784,
+            "ece": 0.0581,
+            "confusion_matrix": [
+              [
+                7897,
+                5703
+              ],
+              [
+                3029,
+                18665
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.06,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7621,
+            "precision_pass": 0.7912,
+            "recall_pass": 0.8233,
+            "f1_pass": 0.8069,
+            "precision_run": 0.7127,
+            "recall_run": 0.6686,
+            "f1_macro": 0.7485,
+            "roc_auc": 0.7839,
+            "log_loss": 0.5412,
+            "brier": 0.1804,
+            "ece": 0.0552,
+            "confusion_matrix": [
+              [
+                18298,
+                9069
+              ],
+              [
+                7375,
+                34368
+              ]
+            ]
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7478,
+            "precision_pass": 0.7655,
+            "recall_pass": 0.85,
+            "f1_pass": 0.8055,
+            "precision_run": 0.7096,
+            "recall_run": 0.5848,
+            "f1_macro": 0.7234,
+            "roc_auc": 0.7923,
+            "log_loss": 0.5282,
+            "brier": 0.1763,
+            "ece": 0.0387,
+            "confusion_matrix": [
+              [
+                7953,
+                5647
+              ],
+              [
+                3255,
+                18439
+              ]
+            ]
+          },
+          "fit_seconds_train": 1.03,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7599,
+            "precision_pass": 0.7937,
+            "recall_pass": 0.814,
+            "f1_pass": 0.8037,
+            "precision_run": 0.7048,
+            "recall_run": 0.6774,
+            "f1_macro": 0.7473,
+            "roc_auc": 0.7821,
+            "log_loss": 0.5328,
+            "brier": 0.1772,
+            "ece": 0.0345,
+            "confusion_matrix": [
+              [
+                18538,
+                8829
+              ],
+              [
+                7766,
+                33977
+              ]
+            ]
+          }
+        },
+        "gradient_boosting": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7478,
+            "precision_pass": 0.7655,
+            "recall_pass": 0.85,
+            "f1_pass": 0.8055,
+            "precision_run": 0.7096,
+            "recall_run": 0.5848,
+            "f1_macro": 0.7234,
+            "roc_auc": 0.7923,
+            "log_loss": 0.5281,
+            "brier": 0.1763,
+            "ece": 0.0389,
+            "confusion_matrix": [
+              [
+                7953,
+                5647
+              ],
+              [
+                3255,
+                18439
+              ]
+            ]
+          },
+          "fit_seconds_train": 2.58,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7599,
+            "precision_pass": 0.7937,
+            "recall_pass": 0.814,
+            "f1_pass": 0.8037,
+            "precision_run": 0.7048,
+            "recall_run": 0.6774,
+            "f1_macro": 0.7473,
+            "roc_auc": 0.782,
+            "log_loss": 0.5328,
+            "brier": 0.1772,
+            "ece": 0.0342,
+            "confusion_matrix": [
+              [
+                18538,
+                8829
+              ],
+              [
+                7766,
+                33977
+              ]
+            ]
+          }
+        }
+      },
+      "test_reliability_selected": [
+        {
+          "bin_low": 0.0,
+          "bin_high": 0.1,
+          "count": 7,
+          "mean_predicted": 0.0948,
+          "observed_pass_rate": 0.1429
+        },
+        {
+          "bin_low": 0.1,
+          "bin_high": 0.2,
+          "count": 422,
+          "mean_predicted": 0.1805,
+          "observed_pass_rate": 0.2227
+        },
+        {
+          "bin_low": 0.2,
+          "bin_high": 0.3,
+          "count": 2817,
+          "mean_predicted": 0.2829,
+          "observed_pass_rate": 0.29
+        },
+        {
+          "bin_low": 0.3,
+          "bin_high": 0.4,
+          "count": 19807,
+          "mean_predicted": 0.351,
+          "observed_pass_rate": 0.297
+        },
+        {
+          "bin_low": 0.4,
+          "bin_high": 0.5,
+          "count": 3251,
+          "mean_predicted": 0.4259,
+          "observed_pass_rate": 0.2987
+        },
+        {
+          "bin_low": 0.5,
+          "bin_high": 0.6,
+          "count": 789,
+          "mean_predicted": 0.5231,
+          "observed_pass_rate": 0.4968
+        },
+        {
+          "bin_low": 0.6,
+          "bin_high": 0.7,
+          "count": 6243,
+          "mean_predicted": 0.6548,
+          "observed_pass_rate": 0.7048
+        },
+        {
+          "bin_low": 0.7,
+          "bin_high": 0.8,
+          "count": 25291,
+          "mean_predicted": 0.7823,
+          "observed_pass_rate": 0.7673
+        },
+        {
+          "bin_low": 0.9,
+          "bin_high": 1.0,
+          "count": 10483,
+          "mean_predicted": 0.9203,
+          "observed_pass_rate": 0.9329
+        }
+      ],
+      "permutation_importance_test": [
+        {
+          "feature": "qb_shotgun",
+          "log_loss_increase": 0.1601,
+          "std": 0.00365
+        },
+        {
+          "feature": "defenders_in_box",
+          "log_loss_increase": 0.04637,
+          "std": 0.00255
+        },
+        {
+          "feature": "qb_under_center",
+          "log_loss_increase": 0.00046,
+          "std": 0.00014
+        },
+        {
+          "feature": "qb_pistol",
+          "log_loss_increase": -0.00067,
+          "std": 7e-05
+        }
+      ],
+      "reference_values": {
+        "qb_shotgun": 1.0,
+        "qb_pistol": 0.0,
+        "qb_under_center": 0.0,
+        "defenders_in_box": 6.0
+      }
+    },
+    "vision_situation": {
+      "features": [
+        "qb_shotgun",
+        "qb_pistol",
+        "qb_under_center",
+        "defenders_in_box",
+        "down",
+        "ydstogo",
+        "yardline_100",
+        "goal_to_go",
+        "qtr",
+        "game_seconds_remaining",
+        "half_seconds_remaining",
+        "score_differential",
+        "posteam_timeouts_remaining",
+        "defteam_timeouts_remaining",
+        "no_huddle"
+      ],
+      "rows": {
+        "train": 237686,
+        "validation": 35294,
+        "test": 69110
+      },
+      "selected_model": "gradient_boosting",
+      "selection_metric": "validation log loss",
+      "models": {
+        "baseline_majority": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.6147,
+            "precision_pass": 0.6147,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7614,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3807,
+            "roc_auc": 0.5,
+            "log_loss": 0.6666,
+            "brier": 0.2369,
+            "ece": 0.0008,
+            "confusion_matrix": [
+              [
+                0,
+                13600
+              ],
+              [
+                0,
+                21694
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.01,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.604,
+            "precision_pass": 0.604,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7531,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3766,
+            "roc_auc": 0.5,
+            "log_loss": 0.6716,
+            "brier": 0.2393,
+            "ece": 0.0114,
+            "confusion_matrix": [
+              [
+                0,
+                27367
+              ],
+              [
+                0,
+                41743
+              ]
+            ]
+          }
+        },
+        "baseline_down_distance": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.6475,
+            "precision_pass": 0.6466,
+            "recall_pass": 0.9407,
+            "f1_pass": 0.7664,
+            "precision_run": 0.6551,
+            "recall_run": 0.1798,
+            "f1_macro": 0.5243,
+            "roc_auc": 0.7024,
+            "log_loss": 0.5902,
+            "brier": 0.205,
+            "ece": 0.0045,
+            "confusion_matrix": [
+              [
+                2445,
+                11155
+              ],
+              [
+                1287,
+                20407
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.11,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.6438,
+            "precision_pass": 0.6392,
+            "recall_pass": 0.9423,
+            "f1_pass": 0.7617,
+            "precision_run": 0.6818,
+            "recall_run": 0.1886,
+            "f1_macro": 0.5286,
+            "roc_auc": 0.7124,
+            "log_loss": 0.5901,
+            "brier": 0.2046,
+            "ece": 0.0159,
+            "confusion_matrix": [
+              [
+                5161,
+                22206
+              ],
+              [
+                2409,
+                39334
+              ]
+            ]
+          }
+        },
+        "baseline_qb_alignment": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7425,
+            "precision_pass": 0.7599,
+            "recall_pass": 0.8495,
+            "f1_pass": 0.8022,
+            "precision_run": 0.7043,
+            "recall_run": 0.572,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7105,
+            "log_loss": 0.5715,
+            "brier": 0.1916,
+            "ece": 0.0314,
+            "confusion_matrix": [
+              [
+                7779,
+                5821
+              ],
+              [
+                3266,
+                18428
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.1,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7961,
+            "recall_pass": 0.8121,
+            "f1_pass": 0.804,
+            "precision_run": 0.7044,
+            "recall_run": 0.6827,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5469,
+            "brier": 0.1809,
+            "ece": 0.0224,
+            "confusion_matrix": [
+              [
+                18683,
+                8684
+              ],
+              [
+                7842,
+                33901
+              ]
+            ]
+          }
+        },
+        "logistic_regression": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7484,
+            "precision_pass": 0.7596,
+            "recall_pass": 0.8641,
+            "f1_pass": 0.8085,
+            "precision_run": 0.7223,
+            "recall_run": 0.5638,
+            "f1_macro": 0.7209,
+            "roc_auc": 0.8179,
+            "log_loss": 0.514,
+            "brier": 0.1705,
+            "ece": 0.0463,
+            "confusion_matrix": [
+              [
+                7668,
+                5932
+              ],
+              [
+                2948,
+                18746
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.13,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7527,
+            "precision_pass": 0.7749,
+            "recall_pass": 0.8324,
+            "f1_pass": 0.8026,
+            "precision_run": 0.7118,
+            "recall_run": 0.6312,
+            "f1_macro": 0.7358,
+            "roc_auc": 0.8101,
+            "log_loss": 0.5221,
+            "brier": 0.173,
+            "ece": 0.0378,
+            "confusion_matrix": [
+              [
+                17273,
+                10094
+              ],
+              [
+                6995,
+                34748
+              ]
+            ]
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7581,
+            "precision_pass": 0.7798,
+            "recall_pass": 0.8451,
+            "f1_pass": 0.8112,
+            "precision_run": 0.7149,
+            "recall_run": 0.6194,
+            "f1_macro": 0.7374,
+            "roc_auc": 0.8371,
+            "log_loss": 0.4829,
+            "brier": 0.1606,
+            "ece": 0.0318,
+            "confusion_matrix": [
+              [
+                8424,
+                5176
+              ],
+              [
+                3360,
+                18334
+              ]
+            ]
+          },
+          "fit_seconds_train": 6.06,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7672,
+            "precision_pass": 0.8034,
+            "recall_pass": 0.8137,
+            "f1_pass": 0.8086,
+            "precision_run": 0.7102,
+            "recall_run": 0.6963,
+            "f1_macro": 0.7559,
+            "roc_auc": 0.838,
+            "log_loss": 0.4835,
+            "brier": 0.1601,
+            "ece": 0.0172,
+            "confusion_matrix": [
+              [
+                19056,
+                8311
+              ],
+              [
+                7775,
+                33968
+              ]
+            ]
+          }
+        },
+        "gradient_boosting": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7635,
+            "precision_pass": 0.7864,
+            "recall_pass": 0.8446,
+            "f1_pass": 0.8145,
+            "precision_run": 0.7189,
+            "recall_run": 0.634,
+            "f1_macro": 0.7441,
+            "roc_auc": 0.8423,
+            "log_loss": 0.4742,
+            "brier": 0.1575,
+            "ece": 0.0225,
+            "confusion_matrix": [
+              [
+                8623,
+                4977
+              ],
+              [
+                3371,
+                18323
+              ]
+            ]
+          },
+          "fit_seconds_train": 3.72,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7684,
+            "precision_pass": 0.8051,
+            "recall_pass": 0.8136,
+            "f1_pass": 0.8093,
+            "precision_run": 0.711,
+            "recall_run": 0.6996,
+            "f1_macro": 0.7573,
+            "roc_auc": 0.8417,
+            "log_loss": 0.477,
+            "brier": 0.1581,
+            "ece": 0.0116,
+            "confusion_matrix": [
+              [
+                19145,
+                8222
+              ],
+              [
+                7782,
+                33961
+              ]
+            ]
+          }
+        }
+      },
+      "test_reliability_selected": [
+        {
+          "bin_low": 0.0,
+          "bin_high": 0.1,
+          "count": 1323,
+          "mean_predicted": 0.064,
+          "observed_pass_rate": 0.0537
+        },
+        {
+          "bin_low": 0.1,
+          "bin_high": 0.2,
+          "count": 3693,
+          "mean_predicted": 0.155,
+          "observed_pass_rate": 0.146
+        },
+        {
+          "bin_low": 0.2,
+          "bin_high": 0.3,
+          "count": 5832,
+          "mean_predicted": 0.2552,
+          "observed_pass_rate": 0.237
+        },
+        {
+          "bin_low": 0.3,
+          "bin_high": 0.4,
+          "count": 10138,
+          "mean_predicted": 0.3586,
+          "observed_pass_rate": 0.3314
+        },
+        {
+          "bin_low": 0.4,
+          "bin_high": 0.5,
+          "count": 5941,
+          "mean_predicted": 0.4405,
+          "observed_pass_rate": 0.409
+        },
+        {
+          "bin_low": 0.5,
+          "bin_high": 0.6,
+          "count": 5662,
+          "mean_predicted": 0.5573,
+          "observed_pass_rate": 0.5581
+        },
+        {
+          "bin_low": 0.6,
+          "bin_high": 0.7,
+          "count": 5989,
+          "mean_predicted": 0.6441,
+          "observed_pass_rate": 0.6467
+        },
+        {
+          "bin_low": 0.7,
+          "bin_high": 0.8,
+          "count": 5953,
+          "mean_predicted": 0.752,
+          "observed_pass_rate": 0.7356
+        },
+        {
+          "bin_low": 0.8,
+          "bin_high": 0.9,
+          "count": 8490,
+          "mean_predicted": 0.8494,
+          "observed_pass_rate": 0.8435
+        },
+        {
+          "bin_low": 0.9,
+          "bin_high": 1.0,
+          "count": 16089,
+          "mean_predicted": 0.9576,
+          "observed_pass_rate": 0.9564
+        }
+      ],
+      "permutation_importance_test": [
+        {
+          "feature": "qb_shotgun",
+          "log_loss_increase": 0.09171,
+          "std": 0.00135
+        },
+        {
+          "feature": "down",
+          "log_loss_increase": 0.0857,
+          "std": 0.00474
+        },
+        {
+          "feature": "ydstogo",
+          "log_loss_increase": 0.07234,
+          "std": 0.00175
+        },
+        {
+          "feature": "score_differential",
+          "log_loss_increase": 0.02709,
+          "std": 0.00284
+        },
+        {
+          "feature": "defenders_in_box",
+          "log_loss_increase": 0.02169,
+          "std": 0.00173
+        },
+        {
+          "feature": "game_seconds_remaining",
+          "log_loss_increase": 0.01978,
+          "std": 0.00126
+        },
+        {
+          "feature": "half_seconds_remaining",
+          "log_loss_increase": 0.01365,
+          "std": 0.0008
+        },
+        {
+          "feature": "yardline_100",
+          "log_loss_increase": 0.00959,
+          "std": 0.00104
+        },
+        {
+          "feature": "no_huddle",
+          "log_loss_increase": 0.00114,
+          "std": 0.00018
+        },
+        {
+          "feature": "posteam_timeouts_remaining",
+          "log_loss_increase": 0.0007,
+          "std": 0.00014
+        },
+        {
+          "feature": "goal_to_go",
+          "log_loss_increase": 0.00049,
+          "std": 0.0001
+        },
+        {
+          "feature": "qb_under_center",
+          "log_loss_increase": 0.00033,
+          "std": 0.00016
+        },
+        {
+          "feature": "qb_pistol",
+          "log_loss_increase": 0.00012,
+          "std": 0.00011
+        },
+        {
+          "feature": "defteam_timeouts_remaining",
+          "log_loss_increase": 8e-05,
+          "std": 0.00017
+        },
+        {
+          "feature": "qtr",
+          "log_loss_increase": -9e-05,
+          "std": 6e-05
+        }
+      ],
+      "reference_values": {
+        "qb_shotgun": 1.0,
+        "qb_pistol": 0.0,
+        "qb_under_center": 0.0,
+        "defenders_in_box": 6.0,
+        "down": 2.0,
+        "ydstogo": 10.0,
+        "yardline_100": 55.0,
+        "goal_to_go": 0.0,
+        "qtr": 3.0,
+        "game_seconds_remaining": 1800.0,
+        "half_seconds_remaining": 831.0,
+        "score_differential": 0.0,
+        "posteam_timeouts_remaining": 3.0,
+        "defteam_timeouts_remaining": 3.0,
+        "no_huddle": 0.0
+      }
+    },
+    "situation": {
+      "features": [
+        "down",
+        "ydstogo",
+        "yardline_100",
+        "goal_to_go",
+        "qtr",
+        "game_seconds_remaining",
+        "half_seconds_remaining",
+        "score_differential",
+        "posteam_timeouts_remaining",
+        "defteam_timeouts_remaining",
+        "no_huddle"
+      ],
+      "rows": {
+        "train": 237917,
+        "validation": 35378,
+        "test": 69201
+      },
+      "selected_model": "gradient_boosting",
+      "selection_metric": "validation log loss",
+      "models": {
+        "baseline_majority": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.6145,
+            "precision_pass": 0.6145,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7612,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3806,
+            "roc_auc": 0.5,
+            "log_loss": 0.6667,
+            "brier": 0.2369,
+            "ece": 0.0009,
+            "confusion_matrix": [
+              [
+                0,
+                13638
+              ],
+              [
+                0,
+                21740
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.01,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.6043,
+            "precision_pass": 0.6043,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7534,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3767,
+            "roc_auc": 0.5,
+            "log_loss": 0.6715,
+            "brier": 0.2392,
+            "ece": 0.011,
+            "confusion_matrix": [
+              [
+                0,
+                27382
+              ],
+              [
+                0,
+                41819
+              ]
+            ]
+          }
+        },
+        "baseline_down_distance": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.6474,
+            "precision_pass": 0.6464,
+            "recall_pass": 0.9407,
+            "f1_pass": 0.7663,
+            "precision_run": 0.6554,
+            "recall_run": 0.1798,
+            "f1_macro": 0.5242,
+            "roc_auc": 0.7023,
+            "log_loss": 0.5903,
+            "brier": 0.205,
+            "ece": 0.0044,
+            "confusion_matrix": [
+              [
+                2452,
+                11186
+              ],
+              [
+                1289,
+                20451
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.11,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.6441,
+            "precision_pass": 0.6395,
+            "recall_pass": 0.9423,
+            "f1_pass": 0.7619,
+            "precision_run": 0.6817,
+            "recall_run": 0.1886,
+            "f1_macro": 0.5287,
+            "roc_auc": 0.7123,
+            "log_loss": 0.5902,
+            "brier": 0.2046,
+            "ece": 0.0159,
+            "confusion_matrix": [
+              [
+                5163,
+                22219
+              ],
+              [
+                2411,
+                39408
+              ]
+            ]
+          }
+        },
+        "logistic_regression": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.6732,
+            "precision_pass": 0.7129,
+            "recall_pass": 0.7841,
+            "f1_pass": 0.7468,
+            "precision_run": 0.5906,
+            "recall_run": 0.4966,
+            "f1_macro": 0.6431,
+            "roc_auc": 0.7262,
+            "log_loss": 0.5894,
+            "brier": 0.2021,
+            "ece": 0.0098,
+            "confusion_matrix": [
+              [
+                6772,
+                6866
+              ],
+              [
+                4694,
+                17046
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.12,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.675,
+            "precision_pass": 0.7043,
+            "recall_pass": 0.7968,
+            "f1_pass": 0.7477,
+            "precision_run": 0.6118,
+            "recall_run": 0.489,
+            "f1_macro": 0.6456,
+            "roc_auc": 0.7306,
+            "log_loss": 0.5919,
+            "brier": 0.2027,
+            "ece": 0.0186,
+            "confusion_matrix": [
+              [
+                13389,
+                13993
+              ],
+              [
+                8497,
+                33322
+              ]
+            ]
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7072,
+            "precision_pass": 0.7588,
+            "recall_pass": 0.7676,
+            "f1_pass": 0.7632,
+            "precision_run": 0.6226,
+            "recall_run": 0.611,
+            "f1_macro": 0.69,
+            "roc_auc": 0.7872,
+            "log_loss": 0.5277,
+            "brier": 0.1799,
+            "ece": 0.0093,
+            "confusion_matrix": [
+              [
+                8333,
+                5305
+              ],
+              [
+                5052,
+                16688
+              ]
+            ]
+          },
+          "fit_seconds_train": 7.28,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7099,
+            "precision_pass": 0.7526,
+            "recall_pass": 0.7744,
+            "f1_pass": 0.7634,
+            "precision_run": 0.6395,
+            "recall_run": 0.6112,
+            "f1_macro": 0.6942,
+            "roc_auc": 0.7905,
+            "log_loss": 0.5295,
+            "brier": 0.1802,
+            "ece": 0.012,
+            "confusion_matrix": [
+              [
+                16737,
+                10645
+              ],
+              [
+                9433,
+                32386
+              ]
+            ]
+          }
+        },
+        "gradient_boosting": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7101,
+            "precision_pass": 0.7757,
+            "recall_pass": 0.7431,
+            "f1_pass": 0.7591,
+            "precision_run": 0.6162,
+            "recall_run": 0.6574,
+            "f1_macro": 0.6976,
+            "roc_auc": 0.7924,
+            "log_loss": 0.5225,
+            "brier": 0.1781,
+            "ece": 0.0096,
+            "confusion_matrix": [
+              [
+                8966,
+                4672
+              ],
+              [
+                5584,
+                16156
+              ]
+            ]
+          },
+          "fit_seconds_train": 2.95,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7146,
+            "precision_pass": 0.7718,
+            "recall_pass": 0.7492,
+            "f1_pass": 0.7603,
+            "precision_run": 0.6334,
+            "recall_run": 0.6616,
+            "f1_macro": 0.7038,
+            "roc_auc": 0.7952,
+            "log_loss": 0.5241,
+            "brier": 0.1783,
+            "ece": 0.0089,
+            "confusion_matrix": [
+              [
+                18117,
+                9265
+              ],
+              [
+                10488,
+                31331
+              ]
+            ]
+          }
+        }
+      },
+      "test_reliability_selected": [
+        {
+          "bin_low": 0.0,
+          "bin_high": 0.1,
+          "count": 882,
+          "mean_predicted": 0.0625,
+          "observed_pass_rate": 0.051
+        },
+        {
+          "bin_low": 0.1,
+          "bin_high": 0.2,
+          "count": 1985,
+          "mean_predicted": 0.1606,
+          "observed_pass_rate": 0.1521
+        },
+        {
+          "bin_low": 0.2,
+          "bin_high": 0.3,
+          "count": 4172,
+          "mean_predicted": 0.2503,
+          "observed_pass_rate": 0.239
+        },
+        {
+          "bin_low": 0.3,
+          "bin_high": 0.4,
+          "count": 5770,
+          "mean_predicted": 0.3575,
+          "observed_pass_rate": 0.3496
+        },
+        {
+          "bin_low": 0.4,
+          "bin_high": 0.5,
+          "count": 15796,
+          "mean_predicted": 0.4567,
+          "observed_pass_rate": 0.4512
+        },
+        {
+          "bin_low": 0.5,
+          "bin_high": 0.6,
+          "count": 7545,
+          "mean_predicted": 0.5513,
+          "observed_pass_rate": 0.5381
+        },
+        {
+          "bin_low": 0.6,
+          "bin_high": 0.7,
+          "count": 6856,
+          "mean_predicted": 0.6517,
+          "observed_pass_rate": 0.6327
+        },
+        {
+          "bin_low": 0.7,
+          "bin_high": 0.8,
+          "count": 6449,
+          "mean_predicted": 0.7479,
+          "observed_pass_rate": 0.7403
+        },
+        {
+          "bin_low": 0.8,
+          "bin_high": 0.9,
+          "count": 5951,
+          "mean_predicted": 0.8518,
+          "observed_pass_rate": 0.8404
+        },
+        {
+          "bin_low": 0.9,
+          "bin_high": 1.0,
+          "count": 13795,
+          "mean_predicted": 0.9583,
+          "observed_pass_rate": 0.9538
+        }
+      ],
+      "permutation_importance_test": [
+        {
+          "feature": "down",
+          "log_loss_increase": 0.21372,
+          "std": 0.00838
+        },
+        {
+          "feature": "ydstogo",
+          "log_loss_increase": 0.15214,
+          "std": 0.00315
+        },
+        {
+          "feature": "score_differential",
+          "log_loss_increase": 0.07399,
+          "std": 0.00196
+        },
+        {
+          "feature": "half_seconds_remaining",
+          "log_loss_increase": 0.0367,
+          "std": 0.00099
+        },
+        {
+          "feature": "game_seconds_remaining",
+          "log_loss_increase": 0.03314,
+          "std": 0.00177
+        },
+        {
+          "feature": "yardline_100",
+          "log_loss_increase": 0.02111,
+          "std": 0.00138
+        },
+        {
+          "feature": "no_huddle",
+          "log_loss_increase": 0.00355,
+          "std": 0.00072
+        },
+        {
+          "feature": "qtr",
+          "log_loss_increase": 0.00142,
+          "std": 0.00043
+        },
+        {
+          "feature": "posteam_timeouts_remaining",
+          "log_loss_increase": 0.00127,
+          "std": 0.00041
+        },
+        {
+          "feature": "goal_to_go",
+          "log_loss_increase": 0.00079,
+          "std": 0.00031
+        },
+        {
+          "feature": "defteam_timeouts_remaining",
+          "log_loss_increase": -0.00028,
+          "std": 0.00021
+        }
+      ],
+      "reference_values": {
+        "down": 2.0,
+        "ydstogo": 10.0,
+        "yardline_100": 55.0,
+        "goal_to_go": 0.0,
+        "qtr": 3.0,
+        "game_seconds_remaining": 1800.0,
+        "half_seconds_remaining": 831.0,
+        "score_differential": 0.0,
+        "posteam_timeouts_remaining": 3.0,
+        "defteam_timeouts_remaining": 3.0,
+        "no_huddle": 0.0
+      }
+    },
+    "full": {
+      "features": [
+        "qb_shotgun",
+        "qb_pistol",
+        "qb_under_center",
+        "defenders_in_box",
+        "down",
+        "ydstogo",
+        "yardline_100",
+        "goal_to_go",
+        "qtr",
+        "game_seconds_remaining",
+        "half_seconds_remaining",
+        "score_differential",
+        "posteam_timeouts_remaining",
+        "defteam_timeouts_remaining",
+        "no_huddle",
+        "off_rb",
+        "off_te",
+        "off_wr",
+        "off_ol",
+        "def_dl",
+        "def_lb",
+        "def_db"
+      ],
+      "rows": {
+        "train": 237686,
+        "validation": 35294,
+        "test": 69110
+      },
+      "selected_model": "gradient_boosting",
+      "selection_metric": "validation log loss",
+      "models": {
+        "baseline_majority": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.6147,
+            "precision_pass": 0.6147,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7614,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3807,
+            "roc_auc": 0.5,
+            "log_loss": 0.6666,
+            "brier": 0.2369,
+            "ece": 0.0008,
+            "confusion_matrix": [
+              [
+                0,
+                13600
+              ],
+              [
+                0,
+                21694
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.01,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.604,
+            "precision_pass": 0.604,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7531,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3766,
+            "roc_auc": 0.5,
+            "log_loss": 0.6716,
+            "brier": 0.2393,
+            "ece": 0.0114,
+            "confusion_matrix": [
+              [
+                0,
+                27367
+              ],
+              [
+                0,
+                41743
+              ]
+            ]
+          }
+        },
+        "baseline_down_distance": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.6475,
+            "precision_pass": 0.6466,
+            "recall_pass": 0.9407,
+            "f1_pass": 0.7664,
+            "precision_run": 0.6551,
+            "recall_run": 0.1798,
+            "f1_macro": 0.5243,
+            "roc_auc": 0.7024,
+            "log_loss": 0.5902,
+            "brier": 0.205,
+            "ece": 0.0045,
+            "confusion_matrix": [
+              [
+                2445,
+                11155
+              ],
+              [
+                1287,
+                20407
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.12,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.6438,
+            "precision_pass": 0.6392,
+            "recall_pass": 0.9423,
+            "f1_pass": 0.7617,
+            "precision_run": 0.6818,
+            "recall_run": 0.1886,
+            "f1_macro": 0.5286,
+            "roc_auc": 0.7124,
+            "log_loss": 0.5901,
+            "brier": 0.2046,
+            "ece": 0.0159,
+            "confusion_matrix": [
+              [
+                5161,
+                22206
+              ],
+              [
+                2409,
+                39334
+              ]
+            ]
+          }
+        },
+        "baseline_qb_alignment": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7425,
+            "precision_pass": 0.7599,
+            "recall_pass": 0.8495,
+            "f1_pass": 0.8022,
+            "precision_run": 0.7043,
+            "recall_run": 0.572,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7105,
+            "log_loss": 0.5715,
+            "brier": 0.1916,
+            "ece": 0.0314,
+            "confusion_matrix": [
+              [
+                7779,
+                5821
+              ],
+              [
+                3266,
+                18428
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.11,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7961,
+            "recall_pass": 0.8121,
+            "f1_pass": 0.804,
+            "precision_run": 0.7044,
+            "recall_run": 0.6827,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5469,
+            "brier": 0.1809,
+            "ece": 0.0224,
+            "confusion_matrix": [
+              [
+                18683,
+                8684
+              ],
+              [
+                7842,
+                33901
+              ]
+            ]
+          }
+        },
+        "logistic_regression": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7484,
+            "precision_pass": 0.7591,
+            "recall_pass": 0.8654,
+            "f1_pass": 0.8087,
+            "precision_run": 0.7234,
+            "recall_run": 0.5618,
+            "f1_macro": 0.7206,
+            "roc_auc": 0.8184,
+            "log_loss": 0.5136,
+            "brier": 0.1704,
+            "ece": 0.0468,
+            "confusion_matrix": [
+              [
+                7641,
+                5959
+              ],
+              [
+                2921,
+                18773
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.21,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7519,
+            "precision_pass": 0.7723,
+            "recall_pass": 0.8356,
+            "f1_pass": 0.8027,
+            "precision_run": 0.7134,
+            "recall_run": 0.6242,
+            "f1_macro": 0.7343,
+            "roc_auc": 0.8107,
+            "log_loss": 0.522,
+            "brier": 0.173,
+            "ece": 0.0386,
+            "confusion_matrix": [
+              [
+                17083,
+                10284
+              ],
+              [
+                6863,
+                34880
+              ]
+            ]
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7563,
+            "precision_pass": 0.7774,
+            "recall_pass": 0.8458,
+            "f1_pass": 0.8101,
+            "precision_run": 0.7138,
+            "recall_run": 0.6137,
+            "f1_macro": 0.7351,
+            "roc_auc": 0.8372,
+            "log_loss": 0.4839,
+            "brier": 0.1608,
+            "ece": 0.0345,
+            "confusion_matrix": [
+              [
+                8346,
+                5254
+              ],
+              [
+                3346,
+                18348
+              ]
+            ]
+          },
+          "fit_seconds_train": 8.32,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7664,
+            "precision_pass": 0.8008,
+            "recall_pass": 0.8162,
+            "f1_pass": 0.8085,
+            "precision_run": 0.7112,
+            "recall_run": 0.6904,
+            "f1_macro": 0.7545,
+            "roc_auc": 0.8385,
+            "log_loss": 0.4834,
+            "brier": 0.16,
+            "ece": 0.0214,
+            "confusion_matrix": [
+              [
+                18893,
+                8474
+              ],
+              [
+                7671,
+                34072
+              ]
+            ]
+          }
+        },
+        "gradient_boosting": {
+          "validation": {
+            "n": 35294,
+            "pass_rate": 0.6147,
+            "accuracy": 0.7638,
+            "precision_pass": 0.7849,
+            "recall_pass": 0.848,
+            "f1_pass": 0.8152,
+            "precision_run": 0.7219,
+            "recall_run": 0.6294,
+            "f1_macro": 0.7439,
+            "roc_auc": 0.8431,
+            "log_loss": 0.4737,
+            "brier": 0.1573,
+            "ece": 0.0254,
+            "confusion_matrix": [
+              [
+                8560,
+                5040
+              ],
+              [
+                3298,
+                18396
+              ]
+            ]
+          },
+          "fit_seconds_train": 7.15,
+          "test": {
+            "n": 69110,
+            "pass_rate": 0.604,
+            "accuracy": 0.7689,
+            "precision_pass": 0.8018,
+            "recall_pass": 0.8202,
+            "f1_pass": 0.8109,
+            "precision_run": 0.7158,
+            "recall_run": 0.6908,
+            "f1_macro": 0.757,
+            "roc_auc": 0.8429,
+            "log_loss": 0.4759,
+            "brier": 0.1577,
+            "ece": 0.0147,
+            "confusion_matrix": [
+              [
+                18905,
+                8462
+              ],
+              [
+                7506,
+                34237
+              ]
+            ]
+          }
+        }
+      },
+      "test_reliability_selected": [
+        {
+          "bin_low": 0.0,
+          "bin_high": 0.1,
+          "count": 1418,
+          "mean_predicted": 0.0632,
+          "observed_pass_rate": 0.0487
+        },
+        {
+          "bin_low": 0.1,
+          "bin_high": 0.2,
+          "count": 3545,
+          "mean_predicted": 0.1543,
+          "observed_pass_rate": 0.1495
+        },
+        {
+          "bin_low": 0.2,
+          "bin_high": 0.3,
+          "count": 5903,
+          "mean_predicted": 0.2542,
+          "observed_pass_rate": 0.2309
+        },
+        {
+          "bin_low": 0.3,
+          "bin_high": 0.4,
+          "count": 8770,
+          "mean_predicted": 0.3521,
+          "observed_pass_rate": 0.3195
+        },
+        {
+          "bin_low": 0.4,
+          "bin_high": 0.5,
+          "count": 6775,
+          "mean_predicted": 0.4451,
+          "observed_pass_rate": 0.4047
+        },
+        {
+          "bin_low": 0.5,
+          "bin_high": 0.6,
+          "count": 6196,
+          "mean_predicted": 0.5526,
+          "observed_pass_rate": 0.5487
+        },
+        {
+          "bin_low": 0.6,
+          "bin_high": 0.7,
+          "count": 5194,
+          "mean_predicted": 0.6509,
+          "observed_pass_rate": 0.6444
+        },
+        {
+          "bin_low": 0.7,
+          "bin_high": 0.8,
+          "count": 6648,
+          "mean_predicted": 0.7537,
+          "observed_pass_rate": 0.7286
+        },
+        {
+          "bin_low": 0.8,
+          "bin_high": 0.9,
+          "count": 8408,
+          "mean_predicted": 0.8503,
+          "observed_pass_rate": 0.8454
+        },
+        {
+          "bin_low": 0.9,
+          "bin_high": 1.0,
+          "count": 16253,
+          "mean_predicted": 0.9567,
+          "observed_pass_rate": 0.956
+        }
+      ],
+      "permutation_importance_test": [
+        {
+          "feature": "qb_shotgun",
+          "log_loss_increase": 0.09803,
+          "std": 0.00182
+        },
+        {
+          "feature": "down",
+          "log_loss_increase": 0.08625,
+          "std": 0.0044
+        },
+        {
+          "feature": "ydstogo",
+          "log_loss_increase": 0.07213,
+          "std": 0.00168
+        },
+        {
+          "feature": "defenders_in_box",
+          "log_loss_increase": 0.02818,
+          "std": 0.00201
+        },
+        {
+          "feature": "score_differential",
+          "log_loss_increase": 0.02503,
+          "std": 0.00289
+        },
+        {
+          "feature": "game_seconds_remaining",
+          "log_loss_increase": 0.01923,
+          "std": 0.0012
+        },
+        {
+          "feature": "half_seconds_remaining",
+          "log_loss_increase": 0.01305,
+          "std": 0.00089
+        },
+        {
+          "feature": "yardline_100",
+          "log_loss_increase": 0.00889,
+          "std": 0.00104
+        },
+        {
+          "feature": "off_te",
+          "log_loss_increase": 0.00257,
+          "std": 0.00042
+        },
+        {
+          "feature": "off_wr",
+          "log_loss_increase": 0.00151,
+          "std": 0.00029
+        },
+        {
+          "feature": "off_ol",
+          "log_loss_increase": 0.00142,
+          "std": 0.00039
+        },
+        {
+          "feature": "no_huddle",
+          "log_loss_increase": 0.00127,
+          "std": 0.00033
+        },
+        {
+          "feature": "def_db",
+          "log_loss_increase": 0.00118,
+          "std": 0.00082
+        },
+        {
+          "feature": "posteam_timeouts_remaining",
+          "log_loss_increase": 0.0005,
+          "std": 0.00026
+        },
+        {
+          "feature": "goal_to_go",
+          "log_loss_increase": 0.00046,
+          "std": 0.0001
+        },
+        {
+          "feature": "off_rb",
+          "log_loss_increase": 0.00044,
+          "std": 0.00023
+        },
+        {
+          "feature": "def_dl",
+          "log_loss_increase": 0.00028,
+          "std": 0.0002
+        },
+        {
+          "feature": "def_lb",
+          "log_loss_increase": 0.00028,
+          "std": 9e-05
+        },
+        {
+          "feature": "qb_under_center",
+          "log_loss_increase": 0.00022,
+          "std": 9e-05
+        },
+        {
+          "feature": "defteam_timeouts_remaining",
+          "log_loss_increase": 0.00011,
+          "std": 0.00013
+        },
+        {
+          "feature": "qtr",
+          "log_loss_increase": -6e-05,
+          "std": 3e-05
+        },
+        {
+          "feature": "qb_pistol",
+          "log_loss_increase": -0.00036,
+          "std": 0.00023
+        }
+      ],
+      "reference_values": {
+        "qb_shotgun": 1.0,
+        "qb_pistol": 0.0,
+        "qb_under_center": 0.0,
+        "defenders_in_box": 6.0,
+        "down": 2.0,
+        "ydstogo": 10.0,
+        "yardline_100": 55.0,
+        "goal_to_go": 0.0,
+        "qtr": 3.0,
+        "game_seconds_remaining": 1800.0,
+        "half_seconds_remaining": 831.0,
+        "score_differential": 0.0,
+        "posteam_timeouts_remaining": 3.0,
+        "defteam_timeouts_remaining": 3.0,
+        "no_huddle": 0.0,
+        "off_rb": 1.0,
+        "off_te": 1.0,
+        "off_wr": 3.0,
+        "off_ol": 5.0,
+        "def_dl": 3.0,
+        "def_lb": 3.0,
+        "def_db": 5.0
+      }
+    }
+  }
+}
