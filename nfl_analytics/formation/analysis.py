@@ -119,6 +119,7 @@ class FormationReport:
     line_extent: Optional[tuple[float, float]] = None  # inline width used for the box
     box_lateral: Optional[tuple[float, float]] = None
     ball_shift: float = 0.0
+    trimmed_teams: set = field(default_factory=set)
     warnings: list[str] = field(default_factory=list)
 
     def finding(self, name: str) -> Finding:
@@ -349,6 +350,20 @@ def analyze_formation(
             "No field calibration (yard lines not measurable): depths are approximate and "
             "depth-based labels are reported only when unambiguous."
         )
+    # A team with 12-14 people usually includes sideline/end-line staff.
+    # Trim the members farthest from the team's centre (at most three) and
+    # mark the team incomplete so completeness-based calls are withheld.
+    for name, members in list(by_team.items()):
+        if 11 < len(members) <= 14:
+            centre = np.median([p.field_xy for p in members], axis=0)
+            ranked = sorted(members, key=lambda p: -np.linalg.norm(p.field_xy - centre))
+            dropped = ranked[: len(members) - 11]
+            players = [p for p in players if p not in dropped]
+            report.trimmed_teams.add(name)
+            report.warnings.append(
+                f"{len(dropped)} outlying person(s) removed from team {name} (likely staff off the field)"
+            )
+    by_team = group(players)
     oversized = [name for name, members in by_team.items() if len(members) > 12]
     if oversized:
         report.message = (
@@ -663,6 +678,8 @@ def _assign_offense_roles(report: FormationReport, offense: list[Player], line: 
     line_left = min(p.lateral for p in line)
     line_right = max(p.lateral for p in line)
     completeness = len(offense)
+    if report.offense_team in report.trimmed_teams:
+        completeness = min(completeness, 10)  # count is not trustworthy after trimming
     findings["offense_players_visible"] = Finding(
         completeness, 1.0 if completeness == 11 else 0.6, f"{completeness} of 11 offensive players located"
     )
@@ -888,8 +905,11 @@ def _assign_defense_roles(
     box_left = min([extent_left] + [p.lateral for p in inline]) - BOX_MARGIN
     box_right = max([extent_right] + [p.lateral for p in inline]) + BOX_MARGIN
     report.box_lateral = (box_left, box_right)
+    trimmed = report.defense_team in report.trimmed_teams
     findings["defense_players_visible"] = Finding(
-        len(defense), 1.0 if len(defense) == 11 else 0.6, f"{len(defense)} of 11 defenders located"
+        len(defense),
+        1.0 if len(defense) == 11 and not trimmed else 0.6,
+        f"{len(defense)} of 11 defenders located" + (" (after removing outliers)" if trimmed else ""),
     )
     for player in defense:
         inside = box_left <= player.lateral <= box_right
@@ -933,7 +953,7 @@ def _assign_defense_roles(
     if calibrated:
         shell_visible = _deep_zone_visible(report)
         deep = [p for p in defense if p.role == "S"]
-        if len(defense) >= 10 and shell_visible:
+        if len(defense) >= 10 and shell_visible and not trimmed:
             name = {0: "0-HIGH", 1: "1-HIGH (MOFC)", 2: "2-HIGH (MOFO)"}.get(len(deep), f"{len(deep)}-DEEP")
             findings["safety_shell"] = Finding(
                 name, 0.6, f"{len(deep)} defender(s) deeper than {DEEP_SAFETY_DEPTH:.0f} yd before the snap (alignment only, not coverage)"

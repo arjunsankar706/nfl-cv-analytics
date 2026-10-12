@@ -41,6 +41,7 @@ class Prediction:
     missing: list[str] = field(default_factory=list)
     contributions: list[dict] = field(default_factory=list)
     test_metrics: dict = field(default_factory=dict)
+    missing_by_model: dict[str, list[str]] = field(default_factory=dict)
 
     @property
     def p_run(self) -> Optional[float]:
@@ -120,12 +121,14 @@ class RunPassPredictor:
                 inputs=supplied,
             )
         best_missing: list[str] | None = None
+        missing_by_model: dict[str, list[str]] = {}
         eligible = []
         for feature_set in PREFERENCE:
             artifact = self.artifacts.get(feature_set)
             if artifact is None:
                 continue
             missing = [name for name in artifact["features"] if name not in supplied]
+            missing_by_model[feature_set] = missing
             if best_missing is None or len(missing) < len(best_missing):
                 best_missing = missing
             if not missing:
@@ -144,6 +147,7 @@ class RunPassPredictor:
                 inputs={name: supplied[name] for name in artifact["features"]},
                 contributions=self._contributions(artifact, row, p_pass),
                 test_metrics=artifact.get("test_metrics", {}),
+                missing_by_model=missing_by_model,
             )
         readable = [FEATURE_DESCRIPTIONS.get(name, name) for name in (best_missing or [])]
         return Prediction(
@@ -152,6 +156,7 @@ class RunPassPredictor:
             + "; ".join(readable),
             inputs=supplied,
             missing=best_missing or [],
+            missing_by_model=missing_by_model,
         )
 
     @staticmethod
