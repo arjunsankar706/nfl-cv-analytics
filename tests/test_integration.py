@@ -9,7 +9,7 @@ import pytest
 
 from nfl_analytics.integration.presnap import find_presnap_windows, relative_motion
 from nfl_analytics.integration.video_analysis import analyze_video, situation_features
-from nfl_analytics.ml.predict import STATUS_INSUFFICIENT, STATUS_OK, RunPassPredictor
+from nfl_analytics.ml.predict import STATUS_INSUFFICIENT, RunPassPredictor
 from nfl_analytics.vision.pipeline import FrameAnalysis, PlayerObservation
 
 FPS = 30.0
@@ -106,5 +106,6 @@ def test_real_clip_end_zone_presnap_window(requires_sample_video):
     assert 1140 <= play.window.start_frame <= 1200
     assert play.window.snap_frame is not None and 1260 <= play.window.snap_frame <= 1300
     assert play.consensus.findings["qb_alignment"].value == "SHOTGUN"
-    # Without scoreboard context and without a confident box count, no model applies.
+    # Shotgun is visible but below the 0.5 confidence the models require, and
+    # there is no scoreboard context, so no model applies.
     assert play.prediction.status == STATUS_INSUFFICIENT and play.prediction.p_pass is None

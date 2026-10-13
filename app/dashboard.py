@@ -17,6 +17,7 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "app"))
 
 from nfl_analytics.formation.analysis import UNKNOWN  # noqa: E402
 from nfl_analytics.formation.render import draw_formation_overlay, tactical_diagram  # noqa: E402
@@ -25,6 +26,8 @@ from nfl_analytics.ml.features import FEATURE_DESCRIPTIONS  # noqa: E402
 from nfl_analytics.ml.predict import STATUS_OK, RunPassPredictor, alignment_to_features  # noqa: E402
 from nfl_analytics.vision.device import choose_device  # noqa: E402
 from nfl_analytics.vision.pipeline import VideoOpenError  # noqa: E402
+
+import simple_view  # noqa: E402
 
 DETECTOR = ROOT / "yolo11n.pt"
 SAMPLE_VIDEO = ROOT / "videos" / "RaidersBroncos.mp4"
@@ -37,7 +40,7 @@ st.set_page_config(page_title="Defensive Intelligence", page_icon="🏈", layout
 st.markdown(
     """
 <style>
-  .block-container {padding-top: 1.4rem; max-width: 1400px;}
+  .block-container {padding-top: 3.2rem; max-width: 1400px;}
   h1, h2, h3 {letter-spacing: .02em;}
   .di-header {display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
               border-bottom:1px solid #1f2a36; padding-bottom:.6rem; margin-bottom:1rem;}
@@ -93,6 +96,18 @@ def card(label: str, value: str, note: str = "") -> str:
 
 
 predictor = load_predictor()
+
+
+def set_view(view: str) -> None:
+    st.session_state["view"] = view
+    st.rerun()
+
+
+# The simple view is the default; the detailed view is one click away.
+if st.session_state.setdefault("view", "simple") == "simple":
+    simple_view.render(predictor, load_formation_analyzer, DETECTOR, SAMPLE_VIDEO, lambda: set_view("detailed"))
+    st.stop()
+
 device = choose_device("auto")
 report_json = load_report()
 
@@ -119,6 +134,8 @@ if not predictor.available:
 
 # ------------------------------------------------------------------- sidebar
 with st.sidebar:
+    if st.button("← Simple view", key="to_simple", use_container_width=True):
+        set_view("simple")
     st.markdown("### Input")
     source = st.radio("Source", ["Upload video", "Upload pre-snap image", "Sample clip"], horizontal=False,
                       key="source", label_visibility="collapsed")

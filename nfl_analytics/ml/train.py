@@ -202,6 +202,7 @@ def write_reliability_plot(report: dict, path: Path) -> None:
         "qb_situation": "#dd1c77",
         "situation": "#31a354",
         "full": "#756bb1",
+        "qb_only": "#999999",
     }
     for feature_set, summary in report["feature_sets"].items():
         rows = summary["test_reliability_selected"]

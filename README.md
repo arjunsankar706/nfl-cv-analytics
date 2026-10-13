@@ -42,7 +42,7 @@ Regenerate with <code>python scripts/make_readme_images.py</code>.</sub></p>
 | Formation | Line of scrimmage, offense identification (tight interior line vs. deep safeties), OL/QB/backs/receivers. Reports QB alignment (**Shotgun / Pistol / Under Center**), backfield (**Singleback / I-Formation / Empty**), receiver distribution, **Trips / Bunch**. Labels coexist, e.g. `Shotgun · Trips Right · Bunch Right`. |
 | Defense | **Box count**, front (on-line / second level / secondary), approximate structure, and pre-snap **safety shell** (alignment only, not coverage). |
 | Prediction | Logistic regression, random forest and gradient boosting against three baselines, split by season. Calibrated probabilities with a per-input sensitivity breakdown. |
-| Dashboard | Streamlit, dark tactical theme. Video or screenshot input, overlay plus top-down diagram, probabilities, model status, play-by-play table, and a model lab with a what-if tool. |
+| Dashboard | Streamlit. Opens in a **simple view** written for young fans (big text, plain words, "7 out of 10 plays like this were passes"); a **detailed view** has the dark tactical theme with video or screenshot input, overlay plus top-down diagram, probabilities, model status, play-by-play table, and a model lab with a what-if tool. |
 
 ## Results
 
@@ -60,6 +60,7 @@ Dropbacks (including sacks and scrambles) count as PASS. Only pre-snap fields ar
 | Always PASS (majority baseline) | 0.604 | 0.500 | 0.672 | 0.239 | 0.011 |
 | Down & distance lookup (baseline) | 0.644 | 0.712 | 0.590 | 0.205 | 0.016 |
 | QB-alignment lookup (baseline) | 0.761 | 0.745 | 0.547 | 0.181 | 0.022 |
+| `qb_only`: QB alignment alone (logistic regression) | 0.761 | 0.745 | 0.547 | 0.181 | 0.022 |
 | `vision`: QB alignment + box count (gradient boosting) | 0.760 | 0.782 | 0.533 | 0.177 | 0.034 |
 | `situation`: down, distance, field position, clock, score (GB) | 0.715 | 0.795 | 0.524 | 0.178 | 0.009 |
 | `qb_situation`: QB alignment + situation (GB) | 0.768 | 0.838 | 0.482 | 0.160 | 0.010 |
@@ -118,7 +119,9 @@ python -m pytest
 
 ### Demo walkthrough
 
-1. Open the dashboard and pick **Sample clip** (or upload a video or a pre-snap screenshot).
+The dashboard opens in the **simple view**: pick *Watch the sample play* (or your own video or picture) and press **Guess the play!** It shows what the computer saw, explains the line-up in plain words and gives the RUN/PASS guess as "N out of 10". The `qb_only` model lets it guess when the video shows only a confident QB alignment; with less than that it says it is not sure. Press **Show me all the details** for the detailed view:
+
+1. Pick **Sample clip** (or upload a video or a pre-snap screenshot).
 2. Optionally enter the scoreboard situation. Blank fields stay missing.
 3. Press **Analyze** and choose a pre-snap window. The **Pre-Snap Read** tab shows the registered field overlay (line of scrimmage, box, roles), a top-down diagram and every finding with its confidence and evidence.
 4. **Play-Call Prediction** shows the RUN/PASS probabilities, the model used, its held-out metrics and what moved the estimate. If inputs are missing, it lists what each model still needs.

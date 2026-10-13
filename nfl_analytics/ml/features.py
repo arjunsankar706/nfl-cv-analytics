@@ -56,6 +56,8 @@ FEATURE_SETS: dict[str, list[str]] = {
     "qb_situation": ["qb_shotgun", "qb_pistol", "qb_under_center"] + SITUATION_FEATURES,
     "situation": SITUATION_FEATURES,
     "full": VISION_FEATURES + SITUATION_FEATURES + PERSONNEL_FEATURES,
+    # Fallback when video gives a confident QB alignment but nothing else.
+    "qb_only": ["qb_shotgun", "qb_pistol", "qb_under_center"],
 }
 
 FEATURE_DESCRIPTIONS = {

@@ -1,6 +1,6 @@
 # RUN/PASS model evaluation
 
-Generated 2026-10-12 17:47 UTC by `python -m nfl_analytics.ml.train`.
+Generated 2026-10-13 02:08 UTC by `python -m nfl_analytics.ml.train`.
 
 * Train seasons: [2016, 2017, 2018, 2019, 2020, 2021, 2022]
 * Validation season (model selection): [2023]
@@ -99,4 +99,22 @@ Rows: train 237,686 / validation 35,294 / test 69,110. Selected: **gradient_boos
 Confusion matrix for the selected model (rows actual, columns predicted): RUN→RUN 18,905, RUN→PASS 8,462, PASS→RUN 7,506, PASS→PASS 34,237.
 
 Permutation importance on test (increase in log loss): qb_shotgun 0.0980, down 0.0862, ydstogo 0.0721, defenders_in_box 0.0282, score_differential 0.0250, game_seconds_remaining 0.0192
+
+## Feature set `qb_only`
+
+Features: qb_shotgun, qb_pistol, qb_under_center
+
+Rows: train 237,917 / validation 35,378 / test 69,201. Selected: **logistic_regression** (lowest validation log loss).
+
+| Model | Test acc | Precision (pass) | Recall (pass) | F1 (pass) | F1 macro | ROC AUC | Log loss | Brier | ECE |
+|---|---|---|---|---|---|---|---|---|---|
+| baseline_majority | 0.604 | 0.604 | 1.000 | 0.753 | 0.377 | 0.500 | 0.671 | 0.239 | 0.011 |
+| baseline_qb_alignment | 0.761 | 0.796 | 0.812 | 0.804 | 0.749 | 0.745 | 0.547 | 0.181 | 0.022 |
+| logistic_regression ✔ | 0.761 | 0.796 | 0.812 | 0.804 | 0.749 | 0.745 | 0.547 | 0.181 | 0.022 |
+| random_forest | 0.761 | 0.796 | 0.812 | 0.804 | 0.749 | 0.745 | 0.547 | 0.181 | 0.022 |
+| gradient_boosting | 0.761 | 0.796 | 0.812 | 0.804 | 0.749 | 0.745 | 0.547 | 0.181 | 0.022 |
+
+Confusion matrix for the selected model (rows actual, columns predicted): RUN→RUN 18,696, RUN→PASS 8,686, PASS→RUN 7,860, PASS→PASS 33,959.
+
+Permutation importance on test (increase in log loss): qb_shotgun 0.0671, qb_under_center 0.0482, qb_pistol 0.0152
 

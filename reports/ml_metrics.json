@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-12 17:47 UTC",
+  "created_utc": "2026-10-13 02:08 UTC",
   "sklearn_version": "1.6.1",
   "split": {
     "train": [
@@ -168,7 +168,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.09,
+          "fit_seconds_train": 0.04,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -221,7 +221,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 1.29,
+          "fit_seconds_train": 0.99,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -274,7 +274,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 5.4,
+          "fit_seconds_train": 2.94,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -607,7 +607,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.13,
+          "fit_seconds_train": 0.14,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -660,7 +660,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 6.81,
+          "fit_seconds_train": 5.83,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -713,7 +713,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 7.15,
+          "fit_seconds_train": 6.15,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -1171,7 +1171,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 7.82,
+          "fit_seconds_train": 7.12,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1224,7 +1224,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 6.78,
+          "fit_seconds_train": 4.29,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1514,7 +1514,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.12,
+          "fit_seconds_train": 0.11,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1567,7 +1567,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.13,
+          "fit_seconds_train": 0.12,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1620,7 +1620,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 7.99,
+          "fit_seconds_train": 7.21,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1673,7 +1673,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 4.93,
+          "fit_seconds_train": 3.23,
           "test": {
             "n": 69201,
             "pass_rate": 0.6043,
@@ -1956,7 +1956,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.12,
+          "fit_seconds_train": 0.11,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -2009,7 +2009,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.11,
+          "fit_seconds_train": 0.1,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -2062,7 +2062,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 0.21,
+          "fit_seconds_train": 0.19,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -2115,7 +2115,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 7.72,
+          "fit_seconds_train": 6.92,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -2168,7 +2168,7 @@
               ]
             ]
           },
-          "fit_seconds_train": 5.08,
+          "fit_seconds_train": 5.04,
           "test": {
             "n": 69110,
             "pass_rate": 0.604,
@@ -2403,6 +2403,325 @@
         "def_dl": 3.0,
         "def_lb": 3.0,
         "def_db": 5.0
+      }
+    },
+    "qb_only": {
+      "features": [
+        "qb_shotgun",
+        "qb_pistol",
+        "qb_under_center"
+      ],
+      "rows": {
+        "train": 237917,
+        "validation": 35378,
+        "test": 69201
+      },
+      "selected_model": "logistic_regression",
+      "selection_metric": "validation log loss",
+      "models": {
+        "baseline_majority": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.6145,
+            "precision_pass": 0.6145,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7612,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3806,
+            "roc_auc": 0.5,
+            "log_loss": 0.6667,
+            "brier": 0.2369,
+            "ece": 0.0009,
+            "confusion_matrix": [
+              [
+                0,
+                13638
+              ],
+              [
+                0,
+                21740
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.01,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.6043,
+            "precision_pass": 0.6043,
+            "recall_pass": 1.0,
+            "f1_pass": 0.7534,
+            "precision_run": 0.0,
+            "recall_run": 0.0,
+            "f1_macro": 0.3767,
+            "roc_auc": 0.5,
+            "log_loss": 0.6715,
+            "brier": 0.2392,
+            "ece": 0.011,
+            "confusion_matrix": [
+              [
+                0,
+                27382
+              ],
+              [
+                0,
+                41819
+              ]
+            ]
+          }
+        },
+        "baseline_qb_alignment": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7424,
+            "precision_pass": 0.7598,
+            "recall_pass": 0.8492,
+            "f1_pass": 0.8021,
+            "precision_run": 0.7042,
+            "recall_run": 0.5722,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7104,
+            "log_loss": 0.5717,
+            "brier": 0.1917,
+            "ece": 0.0315,
+            "confusion_matrix": [
+              [
+                7803,
+                5835
+              ],
+              [
+                3278,
+                18462
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.11,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7963,
+            "recall_pass": 0.812,
+            "f1_pass": 0.8041,
+            "precision_run": 0.704,
+            "recall_run": 0.6828,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5468,
+            "brier": 0.1809,
+            "ece": 0.0225,
+            "confusion_matrix": [
+              [
+                18696,
+                8686
+              ],
+              [
+                7860,
+                33959
+              ]
+            ]
+          }
+        },
+        "logistic_regression": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7424,
+            "precision_pass": 0.7598,
+            "recall_pass": 0.8492,
+            "f1_pass": 0.8021,
+            "precision_run": 0.7042,
+            "recall_run": 0.5722,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7104,
+            "log_loss": 0.5717,
+            "brier": 0.1917,
+            "ece": 0.0315,
+            "confusion_matrix": [
+              [
+                7803,
+                5835
+              ],
+              [
+                3278,
+                18462
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.04,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7963,
+            "recall_pass": 0.812,
+            "f1_pass": 0.8041,
+            "precision_run": 0.704,
+            "recall_run": 0.6828,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5468,
+            "brier": 0.1809,
+            "ece": 0.0225,
+            "confusion_matrix": [
+              [
+                18696,
+                8686
+              ],
+              [
+                7860,
+                33959
+              ]
+            ]
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7424,
+            "precision_pass": 0.7598,
+            "recall_pass": 0.8492,
+            "f1_pass": 0.8021,
+            "precision_run": 0.7042,
+            "recall_run": 0.5722,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7104,
+            "log_loss": 0.5717,
+            "brier": 0.1917,
+            "ece": 0.0315,
+            "confusion_matrix": [
+              [
+                7803,
+                5835
+              ],
+              [
+                3278,
+                18462
+              ]
+            ]
+          },
+          "fit_seconds_train": 0.9,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7963,
+            "recall_pass": 0.812,
+            "f1_pass": 0.8041,
+            "precision_run": 0.704,
+            "recall_run": 0.6828,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5468,
+            "brier": 0.1809,
+            "ece": 0.0225,
+            "confusion_matrix": [
+              [
+                18696,
+                8686
+              ],
+              [
+                7860,
+                33959
+              ]
+            ]
+          }
+        },
+        "gradient_boosting": {
+          "validation": {
+            "n": 35378,
+            "pass_rate": 0.6145,
+            "accuracy": 0.7424,
+            "precision_pass": 0.7598,
+            "recall_pass": 0.8492,
+            "f1_pass": 0.8021,
+            "precision_run": 0.7042,
+            "recall_run": 0.5722,
+            "f1_macro": 0.7167,
+            "roc_auc": 0.7104,
+            "log_loss": 0.5717,
+            "brier": 0.1917,
+            "ece": 0.0315,
+            "confusion_matrix": [
+              [
+                7803,
+                5835
+              ],
+              [
+                3278,
+                18462
+              ]
+            ]
+          },
+          "fit_seconds_train": 1.22,
+          "test": {
+            "n": 69201,
+            "pass_rate": 0.6043,
+            "accuracy": 0.7609,
+            "precision_pass": 0.7963,
+            "recall_pass": 0.812,
+            "f1_pass": 0.8041,
+            "precision_run": 0.704,
+            "recall_run": 0.6828,
+            "f1_macro": 0.7487,
+            "roc_auc": 0.7445,
+            "log_loss": 0.5468,
+            "brier": 0.1809,
+            "ece": 0.0225,
+            "confusion_matrix": [
+              [
+                18696,
+                8686
+              ],
+              [
+                7860,
+                33959
+              ]
+            ]
+          }
+        }
+      },
+      "test_reliability_selected": [
+        {
+          "bin_low": 0.3,
+          "bin_high": 0.4,
+          "count": 26556,
+          "mean_predicted": 0.3337,
+          "observed_pass_rate": 0.296
+        },
+        {
+          "bin_low": 0.7,
+          "bin_high": 0.8,
+          "count": 42645,
+          "mean_predicted": 0.7832,
+          "observed_pass_rate": 0.7963
+        }
+      ],
+      "permutation_importance_test": [
+        {
+          "feature": "qb_shotgun",
+          "log_loss_increase": 0.06714,
+          "std": 0.00198
+        },
+        {
+          "feature": "qb_under_center",
+          "log_loss_increase": 0.04819,
+          "std": 0.00076
+        },
+        {
+          "feature": "qb_pistol",
+          "log_loss_increase": 0.01515,
+          "std": 0.00136
+        }
+      ],
+      "reference_values": {
+        "qb_shotgun": 1.0,
+        "qb_pistol": 0.0,
+        "qb_under_center": 0.0
       }
     }
   }

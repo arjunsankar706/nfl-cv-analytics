@@ -22,7 +22,7 @@ MODEL_DIR = Path(__file__).resolve().parents[2] / "models"
 # Display order. At prediction time the model with the lowest *validation*
 # log loss among those whose inputs are all present is used (the test
 # seasons never influence the choice).
-PREFERENCE = ("full", "vision_situation", "qb_situation", "vision", "situation")
+PREFERENCE = ("full", "vision_situation", "qb_situation", "vision", "situation", "qb_only")
 QB_GROUP = ("qb_shotgun", "qb_pistol", "qb_under_center")
 
 STATUS_OK = "OK"
