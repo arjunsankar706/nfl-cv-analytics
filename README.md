@@ -42,7 +42,7 @@ Regenerate with <code>python scripts/make_readme_images.py</code>.</sub></p>
 | Formation | Line of scrimmage, offense identification (tight interior line vs. deep safeties), OL/QB/backs/receivers. Reports QB alignment (**Shotgun / Pistol / Under Center**), backfield (**Singleback / I-Formation / Empty**), receiver distribution, **Trips / Bunch**. Labels coexist, e.g. `Shotgun · Trips Right · Bunch Right`. |
 | Defense | **Box count**, front (on-line / second level / secondary), approximate structure, and pre-snap **safety shell** (alignment only, not coverage). |
 | Prediction | Logistic regression, random forest and gradient boosting against three baselines, split by season. Calibrated probabilities with a per-input sensitivity breakdown. |
-| Dashboard | Streamlit. Opens in a **simple view** written for young fans (big text, plain words, "7 out of 10 plays like this were passes"); a **detailed view** has the dark tactical theme with video or screenshot input, overlay plus top-down diagram, probabilities, model status, play-by-play table, and a model lab with a what-if tool. |
+| Dashboard | Streamlit. Opens in a **simple view** written for young fans (big text, plain words, YouTube link or upload, "7 out of 10 plays like this were passes"); a **detailed view** has the dark tactical theme with video or screenshot input, overlay plus top-down diagram, probabilities, model status, play-by-play table, and a model lab with a what-if tool. |
 
 ## Results
 
@@ -95,7 +95,15 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-`yolo11n.pt` downloads automatically on first use. Put a broadcast clip at `videos/RaidersBroncos.mp4` (or anywhere) for video features.
+`yolo11n.pt` downloads automatically on first use.
+
+For YouTube links in the dashboard, install the `yt-dlp` tool separately (current releases need Python 3.10+):
+
+```bash
+uv tool install yt-dlp     # or: pipx install yt-dlp
+```
+
+Only YouTube links are accepted. The app downloads a video-only stream of at most 720p (videos over 20 minutes are refused) and analyses one minute from the chosen start time; no ffmpeg is needed. Respect YouTube's terms and the video's copyright. Put a broadcast clip at `videos/RaidersBroncos.mp4` (or anywhere) for video features.
 
 ## Run
 
@@ -119,7 +127,7 @@ python -m pytest
 
 ### Demo walkthrough
 
-The dashboard opens in the **simple view**: pick *Watch the sample play* (or your own video or picture) and press **Guess the play!** It shows what the computer saw, explains the line-up in plain words and gives the RUN/PASS guess as "N out of 10". The `qb_only` model lets it guess when the video shows only a confident QB alignment; with less than that it says it is not sure. Press **Show me all the details** for the detailed view:
+The dashboard opens in the **simple view**: paste a YouTube link (with an optional start time), or upload a video or a picture, and press **Guess the play!** It shows what the computer saw, explains the line-up in plain words and gives the RUN/PASS guess as "N out of 10". The `qb_only` model lets it guess when the video shows only a confident QB alignment. When it can't read the play at all, it still answers, but labels the answer a wild guess based on the league pass rate (60% of 2024-25 plays). Press **Show me all the details** for the detailed view:
 
 1. Pick **Sample clip** (or upload a video or a pre-snap screenshot).
 2. Optionally enter the scoreboard situation. Blank fields stay missing.

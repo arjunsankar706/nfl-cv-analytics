@@ -103,13 +103,24 @@ def set_view(view: str) -> None:
     st.rerun()
 
 
+def league_pass_rate(report: dict | None) -> float | None:
+    """Share of test-season plays that were passes (what the majority baseline predicts)."""
+    if not report:
+        return None
+    summary = next(iter(report["feature_sets"].values()))
+    matrix = summary["models"]["baseline_majority"]["test"]["confusion_matrix"]
+    return (matrix[1][0] + matrix[1][1]) / sum(map(sum, matrix))
+
+
+report_json = load_report()
+
 # The simple view is the default; the detailed view is one click away.
 if st.session_state.setdefault("view", "simple") == "simple":
-    simple_view.render(predictor, load_formation_analyzer, DETECTOR, SAMPLE_VIDEO, lambda: set_view("detailed"))
+    simple_view.render(predictor, load_formation_analyzer, DETECTOR, league_pass_rate(report_json),
+                       lambda: set_view("detailed"))
     st.stop()
 
 device = choose_device("auto")
-report_json = load_report()
 
 # -------------------------------------------------------------------- header
 status_chips = [

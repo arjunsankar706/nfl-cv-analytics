@@ -16,8 +16,11 @@ import numpy as np
 import streamlit as st
 
 from nfl_analytics.integration.video_analysis import analyze_video
+from nfl_analytics.integration.youtube import YouTubeError, fetch_clip
 from nfl_analytics.ml.predict import STATUS_OK, RunPassPredictor
 from nfl_analytics.vision.pipeline import VideoOpenError
+
+CLIP_SECONDS = 60
 
 CSS = """
 <style>
@@ -99,14 +102,37 @@ def describe_lineup(findings: dict) -> list[str]:
     return lines
 
 
-def show_guess(prediction) -> None:
-    if prediction.status != STATUS_OK:
-        st.markdown(
-            '<div class="kid-guess"><div class="word" style="font-size:2.4rem">🤔 Not sure</div>'
-            '<div class="why">The computer could not see enough of the players to make a fair guess. '
-            "Try a wide camera view where you can see everyone before the snap.</div></div>",
-            unsafe_allow_html=True,
-        )
+def show_wild_guess(base_pass_rate: Optional[float]) -> None:
+    """Shown when the picture alone is not enough: fall back to how often NFL
+    teams pass overall (the majority baseline), and say that plainly."""
+    if base_pass_rate is None:
+        fact = "most NFL plays are passes"
+        dots_html = ""
+    else:
+        count = out_of_ten(base_pass_rate)
+        fact = f"about <b>{count} out of 10</b> NFL plays are passes"
+        dots_html = (f'<div class="kid-dots">{dots(count)}</div>'
+                     '<div style="font-size:1.05rem; color:#9aa6b4">🏈 = pass &nbsp;&nbsp; ⚪ = run</div>')
+    st.markdown(
+        f"""<div class="kid-guess">
+          <div style="font-size:1.3rem">The computer's best guess…</div>
+          <div class="word">PASS 🎯</div>
+          <div class="why">It couldn't see the players clearly enough to read this play, so it used a fun fact:
+            {fact}.</div>
+          {dots_html}
+        </div>""",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<div class="kid-note">This one is a wild guess! For a smarter guess, use a video from a wide camera '
+        "that shows all the players standing still right before the snap.</div>",
+        unsafe_allow_html=True,
+    )
+
+
+def show_guess(prediction, base_pass_rate: Optional[float]) -> None:
+    if prediction is None or prediction.status != STATUS_OK:
+        show_wild_guess(base_pass_rate)
         return
     call = prediction.call
     chance = prediction.p_pass if call == "PASS" else prediction.p_run
@@ -132,7 +158,7 @@ def show_guess(prediction) -> None:
         )
 
 
-def show_play(findings: dict, overlay_bgr: Optional[np.ndarray], prediction) -> None:
+def show_play(findings: dict, overlay_bgr: Optional[np.ndarray], prediction, base_pass_rate: Optional[float]) -> None:
     st.markdown('<div class="kid-step">1. Here is what the computer saw</div>', unsafe_allow_html=True)
     if overlay_bgr is not None:
         st.image(overlay_bgr, channels="BGR", use_container_width=True)
@@ -145,14 +171,14 @@ def show_play(findings: dict, overlay_bgr: Optional[np.ndarray], prediction) -> 
     sentences = "".join(f"<p style='margin:.35rem 0'>{line}</p>" for line in describe_lineup(findings))
     st.markdown(f'<div class="kid-box">{sentences}</div>', unsafe_allow_html=True)
     st.markdown('<div class="kid-step">3. Run or pass?</div>', unsafe_allow_html=True)
-    show_guess(prediction)
+    show_guess(prediction, base_pass_rate)
 
 
 def render(
     predictor: RunPassPredictor,
     load_analyzer: Callable,
     detector: Path,
-    sample_video: Path,
+    base_pass_rate: Optional[float],
     switch_view: Callable[[], None],
 ) -> None:
     st.markdown(CSS, unsafe_allow_html=True)
@@ -163,14 +189,17 @@ def render(
         unsafe_allow_html=True,
     )
 
-    choices = ["Watch the sample play", "Use my own video", "Use a picture"]
-    if not sample_video.exists():
-        choices = choices[1:]
-    source = st.radio("Pick a play", choices, horizontal=True, key="kid_source")
+    source = st.radio("Pick a play", ["Paste a YouTube link", "Upload my video", "Upload a picture"],
+                      horizontal=True, key="kid_source")
     upload = None
-    if source == "Use my own video":
+    link = start = ""
+    if source == "Paste a YouTube link":
+        link = st.text_input("YouTube link", placeholder="https://www.youtube.com/watch?v=…", key="kid_link")
+        start = st.text_input("Start watching at (minutes:seconds)", value="0:00", key="kid_start",
+                              help="The computer watches one minute of the video from here.")
+    elif source == "Upload my video":
         upload = st.file_uploader("Add a football video", type=["mp4", "mov", "m4v", "avi", "mkv"], key="kid_video")
-    elif source == "Use a picture":
+    else:
         upload = st.file_uploader("Add a picture taken right before the snap", type=["png", "jpg", "jpeg"],
                                   key="kid_image")
     go = st.button("🏈 Guess the play!", type="primary", use_container_width=True, key="kid_go")
@@ -178,7 +207,7 @@ def render(
     if go:
         st.session_state.pop("result", None)
         st.session_state.pop("image_result", None)
-        if source == "Use a picture":
+        if source == "Upload a picture":
             if upload is None:
                 st.warning("Add a picture first, then press the button.")
             else:
@@ -191,14 +220,21 @@ def render(
                     st.session_state["image_result"] = (image, report, predictor.predict(report.model_inputs()))
         else:
             path = None
-            if source == "Watch the sample play":
-                path = sample_video
+            if source == "Paste a YouTube link":
+                if not link.strip():
+                    st.warning("Paste a YouTube link first, then press the button.")
+                else:
+                    try:
+                        with st.spinner("Getting the video from YouTube… 📺"):
+                            path = fetch_clip(link, start, seconds=CLIP_SECONDS)
+                    except YouTubeError as error:
+                        st.warning(str(error))
             elif upload is not None:
                 path = Path(tempfile.mkdtemp(prefix="di_")) / Path(upload.name).name
                 path.write_bytes(upload.getbuffer())
-            if path is None:
-                st.warning("Add a video first, then press the button.")
             else:
+                st.warning("Add a video first, then press the button.")
+            if path is not None:
                 bar = st.progress(0.0, text="The computer is watching the play… 👀 (this takes about a minute)")
                 try:
                     result = analyze_video(
@@ -222,17 +258,19 @@ def render(
 
         image, report, prediction = image_result
         if report.status != "OK":
-            st.markdown('<div class="kid-box">🤔 The computer could not find the players lined up in this picture. '
-                        "Try a picture from a wide camera, right before the snap.</div>", unsafe_allow_html=True)
+            st.image(image, channels="BGR", use_container_width=True)
+            st.markdown('<div class="kid-box">The computer could not find the players lined up in this picture.</div>',
+                        unsafe_allow_html=True)
+            show_wild_guess(base_pass_rate)
         else:
-            show_play(report.findings, draw_formation_overlay(image, report), prediction)
+            show_play(report.findings, draw_formation_overlay(image, report), prediction, base_pass_rate)
     elif video_result is not None:
         _, result = video_result
         plays = result.verified_plays
         if not plays:
-            st.markdown('<div class="kid-box">🤔 The computer could not find a moment where the players were lined up '
-                        "and standing still. Try a video from a wide camera that starts before the snap.</div>",
-                        unsafe_allow_html=True)
+            st.markdown('<div class="kid-box">The computer could not find a moment where the players were lined up '
+                        "and standing still.</div>", unsafe_allow_html=True)
+            show_wild_guess(base_pass_rate)
         else:
             # Open on the first play the computer could make a guess for.
             index = next((n for n, play in enumerate(plays) if play.prediction.status == STATUS_OK), 0)
@@ -241,7 +279,7 @@ def render(
                 index = st.radio("This video has more than one play. Pick one:", range(len(plays)), index=index,
                                  format_func=lambda n: labels[n], horizontal=True, key="kid_play")
             play = plays[index]
-            show_play(play.consensus.findings, play.overlay_bgr, play.prediction)
+            show_play(play.consensus.findings, play.overlay_bgr, play.prediction, base_pass_rate)
 
     st.write("")
     st.divider()
