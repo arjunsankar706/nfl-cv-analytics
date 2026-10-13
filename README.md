@@ -22,6 +22,14 @@ video ─► YOLO11 + ByteTrack ─► camera-stabilised motion ─► pre-snap 
                           P(RUN) / P(PASS)
 ```
 
+<p align="center">
+  <img src="docs/images/bunch_right_overlay.jpg" width="62%" alt="Formation overlay on a synthetic broadcast frame">
+  <img src="docs/images/bunch_right_diagram.png" width="34%" alt="Top-down tactical diagram in yards">
+</p>
+<p align="center"><sub>Synthetic broadcast-style frame with known ground truth (no NFL footage): registered field,
+line of scrimmage, roles, box and safety shell, and the same read as a top-down diagram in yards.
+Regenerate with <code>python scripts/make_readme_images.py</code>.</sub></p>
+
 ## What it does
 
 | Stage | Implementation |
@@ -62,7 +70,9 @@ What these numbers say:
 - Shotgun vs. under center explains most of the signal. With vision features alone, the learned model **does not beat the QB-alignment lookup on accuracy**. It only improves ranking (AUC 0.745 → 0.782) and log loss.
 - Situational context brings it to AUC ≈ 0.84.
 - Personnel adds almost nothing on top of alignment, box count and situation.
-- Calibration is good (ECE ≈ 0.01–0.03). See [`reports/calibration_test.png`](reports/calibration_test.png).
+- Calibration is good (ECE ≈ 0.01–0.03):
+
+<p align="center"><img src="reports/calibration_test.png" width="55%" alt="Calibration curves on the 2024-25 test set"></p>
 
 ### Computer vision (measured on this machine, Apple M5, MPS)
 
